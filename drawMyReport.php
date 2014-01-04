@@ -138,19 +138,22 @@ $tpl->assign("path", $path);
 <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
 
 
-<button type="button" class="btn btn-primary">Primary</button>
 COUCOU release {$dummy_release}<br /><br />
 Hello World, I'm {$contact_infos.contact_name}<br />
 I have installed an Centreon package with a Smarty dummy page, but I can do much more...<br />
 
 <div id="chart_div" class="untarget-after"></div>
 <div id="chart_div2" class="untarget-after"></div>
-
-<canvas id="canvas" class="canvases" width="1" height="1"></canvas>
-<canvas id="canvas2" class="canvases" width="1" height="1"></canvas>
+<p>
+    <canvas id="canvas" class="canvases" width="1" height="1"></canvas>
+</p>
+<p>
+    <canvas id="canvas2" class="canvases" width="1" height="1"></canvas>
+</p>
 
 <div class="untarget">
- <button id="cmd">generate PDF</button>
+<p>This is a bootstrap button :</p>
+ <button id="cmd" type="button" class="btn btn-primary">generate PDF</button>
 </div>
 </div>
   </body>

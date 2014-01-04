@@ -1,4 +1,3 @@
-//include "./html2canvas.js"
     $(document).ready(function(){ 
 	function cleanHTML() {
 	    var divToClean = $('.untarget');
@@ -24,7 +23,6 @@
 	    cleanHTML();
 	    convertCharts();
 
-//	    canvg(document.getElementById('canvas'), $('svg').parent().html());
 /*
 	    $.ajax({
 	        url: "http://172.16.128.129/centreon/modules/drawMyReport/data/chart2canvas.php",
@@ -37,7 +35,6 @@
 	    var capture = {};
 	    var target = $('#target');
 	    html2canvas(target, {
-//		proxy: "http://172.16.128.129/centreon/modules/drawMyReport/include/php/html2canvasproxy.php",
 		onrendered: function(canvas) {
 		    var img = canvas.toDataURL("image/png")
 		    window.open(img);
@@ -45,7 +42,7 @@
 		    capture.data = { 'image' : capture.img };
                     /* save the image on the server */
 		    $.ajax({
-			url: "http://172.16.128.129/centreon/modules/drawMyReport/include/js/ajax.php",
+			url: "http://172.16.128.129/centreon/modules/drawMyReport/include/php/ajax.php",
 			data: capture.data,
 			type: 'post',
 			success: function( result ) {
@@ -54,5 +51,25 @@
 		    });
 		}
 	    });
+
+
+	    html2canvas(target, {
+		onrendered: function(canvas) {
+		    capture.img = canvas.toDataURL( "application/pdf" );
+		    capture.data = { 'image' : capture.img };
+                    /* save the image on the server */
+		    $.ajax({
+			url: "http://172.16.128.129/centreon/modules/drawMyReport/include/php/ajax2.php",
+			data: capture.data,
+			type: 'post',
+			success: function( result ) {
+			    console.log( result );
+			}
+		    });
+		}
+	    });
+
+
+
 	});
     });
