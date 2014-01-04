@@ -1,0 +1,20 @@
+##
+# Before installation
+##
+
+Set HTTP rights in your module directory, for example :
+# cd /usr/local/centreon/www/modules
+# chown -R apache.apache dummy
+Notes: The user and group "apache" change for each Linux distribution.
+
+##
+# After installation
+##
+
+Copy dependencies in Nagios directories and set good rights, for example to use a nagios plugin:
+# cd /usr/local/centreon/modules/dummy/plugins
+# cp /usr/local/centreon/modules/dummy/plugins/check_dummy.pl /usr/local/nagios/libexec/
+# chmod 755 /usr/local/nagios/libexec/check_dummy.pl
+
+And set good rights on plugin:
+# chown nagios.nagcmd /usr/local/nagios/libexec/check_dummy.pl
