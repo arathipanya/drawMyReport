@@ -37,7 +37,7 @@
 	    html2canvas(target, {
 		onrendered: function(canvas) {
 		    var img = canvas.toDataURL("image/png")
-		    window.open(img);
+//		    window.open(img);
 		    capture.img = canvas.toDataURL( "image/png" );
 		    capture.data = { 'image' : capture.img };
                     /* save the image on the server */
@@ -51,25 +51,6 @@
 		    });
 		}
 	    });
-
-
-	    html2canvas(target, {
-		onrendered: function(canvas) {
-		    capture.img = canvas.toDataURL( "application/pdf" );
-		    capture.data = { 'image' : capture.img };
-                    /* save the image on the server */
-		    $.ajax({
-			url: "http://172.16.128.129/centreon/modules/drawMyReport/include/php/ajax2.php",
-			data: capture.data,
-			type: 'post',
-			success: function( result ) {
-			    console.log( result );
-			}
-		    });
-		}
-	    });
-
-
 
 	});
     });
