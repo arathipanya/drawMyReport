@@ -42,7 +42,7 @@
 		    capture.data = { 'image' : capture.img };
                     /* save the image on the server */
 		    $.ajax({
-			url: "http://172.16.128.129/centreon/modules/drawMyReport/include/php/ajax.php",
+			url: "modules/drawMyReport/include/php/ajax.php",
 			data: capture.data,
 			type: 'post',
 			success: function( result ) {
