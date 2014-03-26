@@ -332,10 +332,6 @@
 			<!--		Menu sous forme d'onglets		-->
 			
 			<div id="tabs">
-				<ul>
-					<li><a href="CreateReport.html" class="selected" target="mainFrame" onclick="loadit (this)" >PERSONNALISATION ET SAUVEGARDE DES RAPPORTS</a></li>
-					<li><a href="ReportBuilding.html" target="mainFrame" onclick="loadit (this)" >PARAMETRAGE DES ENVOIS PAR EMAIL</a></li>					
-				</ul>
 			</div>
 			
 			<!--       Div principale pour la personnalisation et sauvegarde des rapports      -->		

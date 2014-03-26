@@ -28,11 +28,6 @@
 			<p><h1>Elements de rapport</h1></p>
 			
 			<div id="tabs">
-				<ul>
-					<li><a href="CreateReport.html" target="mainFrame" onclick="loadit (this)" >PERSONNALISATION ET SAUVEGARDE DES RAPPORTS</a></li>
-					<li><a href="ReportBuilding.html" class="selected" target="mainFrame" onclick="loadit (this)" >PARAMETRAGE DES ENVOIS PAR EMAIL</a></li>					
-				</ul>
-		
 				<div id="toto"
 					<p></p>
 					<form id="form1" action="" method="post" name="form1">
