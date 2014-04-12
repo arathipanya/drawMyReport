@@ -19,31 +19,12 @@
 		exit ();
 	}
 
-	#Pear library
-	require_once "HTML/QuickForm.php";
-	require_once 'HTML/QuickForm/advmultiselect.php';
-	require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
-
-	$form = new HTML_QuickForm();
-
 	#Path to the configuration dir
 	global $path;
 	$path = "./modules/drawMyReport/";
 
 	#PHP functions
-
 	require_once "DB-Func.php";
-	require_once "./include/common/common-Func.php";
-
-	# Smarty template Init
-	/*	$tpl = new Smarty();
-	$tpl = initSmartyTpl($path, $tpl);
-$tpl->assign("path", $path);
-	$tpl->assign("contact_infos", getContactInfo());
-	$tpl->assign("drawMyReport_release", "2.0");
-	$tpl->display("drawMyReport.ihtml");
-	*/
-
 ?>
 
 <!DOCTYPE html>
@@ -68,66 +49,6 @@ $tpl->assign("path", $path);
     <![endif]-->
 
     <script type="text/javascript" src="./modules/drawMyReport/include/js/jsapi.js"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-      google.setOnLoadCallback(drawChart2);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-
-      function drawChart2() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'How Much Pizza22 I Ate Last22 Night',
-                       'width':400,
-                       'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
-    </script>
 
     <script type="text/javascript" src="./modules/drawMyReport/include/js/base.js"></script>
     <script type="text/javascript" src="./modules/drawMyReport/include/js/html2canvas.js"></script>
@@ -138,23 +59,15 @@ $tpl->assign("path", $path);
 <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
 
 
-COUCOU release {$dummy_release}<br /><br />
-Hello World, I'm {$contact_infos.contact_name}<br />
-I have installed an Centreon package with a Smarty dummy page, but I can do much more...<br />
+    Hello world we are <?php $contactInfo = getContactInfo(); $contact_name = $contactInfo[contact_name]; echo $contact_name; ?><br />
+<br />
 
-<div id="chart_div" class="untarget-after"></div>
-<div id="chart_div2" class="untarget-after"></div>
-<p>
-    <canvas id="canvas" class="canvases" width="1" height="1"></canvas>
-</p>
-<p>
-    <canvas id="canvas2" class="canvases" width="1" height="1"></canvas>
-</p>
+    <img id="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service=15-30&tp=<?php echo 60 * 60 * 24 ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=900"
 
-<div class="untarget">
-<p>This is a bootstrap button :</p>
- <button id="cmd" type="button" class="btn btn-primary">generate PDF</button>
-</div>
+    <div class="untarget">
+        <p>This is a bootstrap button :</p>
+        <button id="cmd" type="button" class="btn btn-primary">generate PDF</button>
+    </div>
 </div>
   </body>
 </html>

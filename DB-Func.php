@@ -35,4 +35,21 @@
 		}
 	}
 
+function getLogs() {
+  global $pearDB;
+  global $oreon;
+
+  $DBRESULT =& $pearDB->query("SELECT * FROM centreon_storage.logs WHERE host_name = 'mac' LIMIT 10");
+  
+  if (PEAR::isError($DBRESULT)) {
+    print "DB Error : ".$DBRESULT->getDebugInfo()."<br />";
+  }
+  
+  if ($DBRESULT->numRows()) {
+    return $DBRESULT->fetchRow();
+  } else {
+    return array();
+  }
+}
+
 ?>
