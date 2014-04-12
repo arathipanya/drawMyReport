@@ -80,5 +80,13 @@ console.log(value);
 		$("#select-graph-report-model").prepend(model.parent().html());
 	});
 
+	$(".edit-graph").click(function(e){
+		e.preventDefault();
 	
+		var path = $(this).attr("href");
+		$.get(path, function(dataResult) {
+			console.log(dataResult);
+			$("#form-create-graph").parent().html(dataResult);
+		});
+	});	
 });
