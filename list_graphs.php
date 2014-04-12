@@ -52,6 +52,7 @@ if ($_POST["create_graph"]) {
   
   dbClose($db);
 }
+
 ?>
 
 
@@ -59,7 +60,7 @@ if ($_POST["create_graph"]) {
 
 <a href="#" class="create-graph">Create a graph</a>
 
-<form class="bs-example bs-example-form" hidden role="form" id="form-create-graph" method="post" action="">
+<form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
   <a href="#" class="close-create-graph" title="close form">x</a>
     <div class="input-group">
       <span class="input-group-addon">Name</span>
@@ -130,14 +131,13 @@ if ($_POST["create_graph"]) {
 
 <hr>
 
-<div>
+<div class="col-lg-12">
     <h4>List of graphs</h4>
 <?php 
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-  $error=0;
-
+ 
   $graphs_list = mysql_query("SELECT * FROM drawmyreport_graphs;");
   dbClose($db);
 ?>
@@ -148,6 +148,7 @@ if ($_POST["create_graph"]) {
     <th>Description</th>
     <th>Type</th>
     <th>Period</th>
+    <th>Action</th>
   </tr>
 <?php
     while ($row = mysql_fetch_object($graphs_list)) {
@@ -158,6 +159,7 @@ if ($_POST["create_graph"]) {
       <td><?php echo $row->description ?></td>
       <td><?php echo $row->type ?></td>
       <td><?php echo $row->period ?></td>
+      <td><a href="main.php?p=90104&graph_id=<?php echo $row->id ?>" title="Edit" class="edit-graph"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
   </tr>      
 <?php
     }

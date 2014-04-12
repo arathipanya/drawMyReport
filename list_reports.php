@@ -47,7 +47,7 @@ if ($_POST["create_report"]) {
 
 <a href="#" class="create-graph">Create a report</a>
 
-<form class="bs-example bs-example-form" hidden role="form" id="form-create-graph" method="post" action="">
+<form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
   <a href="#" class="close-create-graph" title="close form">x</a>
     <div class="input-group">
       <span class="input-group-addon">Name</span>
@@ -94,7 +94,7 @@ dbClose($db);
 <hr>
 
 
-<div>
+<div class="col-lg-12">
     <h4>List of reports</h4>
 <?php 
   global $conf_centreon;

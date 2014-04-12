@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `drawmyreport_graphs` (
   `description` varchar(254) default NULL,
   `type` varchar(254) default NULL, 
   `period` varchar(254) default NULL,
-  `data` varchar(254) default NULL,
+  `data` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -49,12 +49,14 @@ CREATE TABLE IF NOT EXISTS `drawmyreport_reports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `drawmyreport_report_graphs` (
+  `id` int(11) NOT NULL auto_increment,
   `report_id` int(11) DEFAULT '0' NOT NULL,
   `graph_id` int(11) DEFAULT '0' NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `drawmyreport_emails_users` (
+  `id` int(11) NOT NULL auto_increment,
   `email_id` int(11) DEFAULT '0' NOT NULL,
   `user_id` int(11) DEFAULT '0' NOT NULL,
   PRIMARY KEY  (`id`)

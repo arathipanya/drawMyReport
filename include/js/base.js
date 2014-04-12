@@ -79,4 +79,6 @@ console.log(value);
 		
 		$("#select-graph-report-model").prepend(model.parent().html());
 	});
+
+	
 });

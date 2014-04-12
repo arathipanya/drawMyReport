@@ -31,7 +31,7 @@ if ($_POST["create_report"]) {
   if ($_POST["create_report"]["graphs"]) {
     $post_graphs_array = $_POST["create_report"]["graphs"];
     for ($i = 0; $i < count($post_graphs_array); $i++) {
-      if ($post_graphs_array[$i] == "-") {
+      if ($post_graphs_array[$i] !== "-") {
         mysql_query("INSERT INTO drawmyreport_report_graphs (report_id, graph_id) VALUES('".$report_id."','".$post_graphs_array[$i]."');");
       }
     }
