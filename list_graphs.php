@@ -1,3 +1,28 @@
+<?php
+include './modules/drawMyReport/DB-Func.php';
+include './modules/drawMyReport/include/php/graphs-func.php';
+
+function getIndexData() {
+  global $conf_centreon;
+
+  $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['dbcstg'], true);
+  $service_groups_list = mysql_query("SELECT * FROM index_data ORDER BY service_description");
+
+  $str = '<div class="select-parent"><select type="text" class="form-control" name="create_graph[data]" placeholder="Select a service">
+          <option value="-">- Select a service/host</option>';
+
+  while ($row = mysql_fetch_object($service_groups_list)) {
+    $str .= '<option value="'.$row->id.'">'.$row->service_description.'    -    '.$row->host_name.'</options>';
+  }
+  $str .= '</select></div><br>';
+
+  dbClose($db);
+  return $str;
+}
+
+
+?>
+
 <!-- Bootstrap -->
     <link href="./modules/drawMyReport/include/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
@@ -16,15 +41,13 @@
 
 
 <?php 
-include './modules/drawMyReport/DB-Func.php';
-
 if ($_POST["create_graph"]) {
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
   $error=0;
 
-  mysql_query("INSERT INTO drawmyreport_graphs (name, title, description, type, period, data) VALUES('".$_POST["create_graph"]["name"]."','".$_POST["create_graph"]["title"]."','".$_POST["create_graph"]["description"]."','".$_POST["create_graph"]["type"]."','".$_POST["create_graph"]["period"]."','');");
+  mysql_query("INSERT INTO drawmyreport_graphs (name, title, description, type, period, data) VALUES('".$_POST["create_graph"]["name"]."','".$_POST["create_graph"]["title"]."','".$_POST["create_graph"]["description"]."','".$_POST["create_graph"]["type"]."','".$_POST["create_graph"]["period"]."','".$_POST["create_graph"]["data"]."');");
   $_POST=Array();
   
   dbClose($db);
@@ -56,7 +79,7 @@ if ($_POST["create_graph"]) {
     <div class="input-group">
       <span class="input-group-addon">
         type1
-        <input type="radio" name="create_graph[type]" value="type1">
+        <input type="radio" name="create_graph[type]" checked value="type1">
       </span>
       <span class="input-group-addon">
         type2
@@ -75,7 +98,7 @@ if ($_POST["create_graph"]) {
     <div class="input-group">
       <span class="input-group-addon">
         day
-        <input type="radio" name="create_graph[period]" value="day">
+        <input type="radio" name="create_graph[period]" checked value="day">
       </span>
       <span class="input-group-addon">
         week
@@ -91,6 +114,15 @@ if ($_POST["create_graph"]) {
       </span>
     </div>
     <br>
+
+    <div class="input-group-btn">
+        <span class="input-group-addon">Service/host</span>
+        <div>
+           <?php echo getIndexData() ?>
+        </div>
+    </div>
+    <div id="load-services"></div>
+
     <button class="btn btn-default" type="submit">Save</button>
   </form>
 

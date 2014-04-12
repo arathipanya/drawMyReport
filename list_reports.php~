@@ -17,6 +17,7 @@
 
 <?php 
 include './modules/drawMyReport/DB-Func.php';
+include './modules/drawMyReport/include/php/reports-func.php';
 
 if ($_POST["create_report"]) {
   global $conf_centreon;
@@ -24,9 +25,19 @@ if ($_POST["create_report"]) {
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
   $error=0;
 
-  mysql_query("INSERT INTO drawmyreport_reports (name, title, subtitle) VALUES('".$_POST["create_report"]["name"]."','".$_POST["create_report"]["title"]."','".$_POST["create_report"]["subtitle"]."');");
+  $result = mysql_query("INSERT INTO drawmyreport_reports (name, title, subtitle) VALUES('".$_POST["create_report"]["name"]."','".$_POST["create_report"]["title"]."','".$_POST["create_report"]["subtitle"]."');");
+  $report_id = mysql_insert_id();
+
+  if ($_POST["create_report"]["graphs"]) {
+    $post_graphs_array = $_POST["create_report"]["graphs"];
+    for ($i = 0; $i < count($post_graphs_array); $i++) {
+      if ($post_graphs_array[$i] == "-") {
+        mysql_query("INSERT INTO drawmyreport_report_graphs (report_id, graph_id) VALUES('".$report_id."','".$post_graphs_array[$i]."');");
+      }
+    }
+  }
+
   $_POST=Array();
-  
   dbClose($db);
 }
 ?>
@@ -53,7 +64,30 @@ if ($_POST["create_report"]) {
       <input type="text" class="form-control" name="create_report[subtitle]" placeholder="Description">
     </div>
     <br>
-    <button class="btn btn-default" type="submit">Save</button>
+
+<?php
+global $conf_centreon;
+
+$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
+$graphs_list = mysql_query("SELECT * FROM drawmyreport_graphs;");
+$graphs_array = array();
+
+while ($graph_row = mysql_fetch_object($graphs_list)) {
+  array_push($graphs_array, $graph_row);
+}
+
+dbClose($db);
+
+?>
+    <div class="input-group-btn" id="select-graphs-list-report">
+        <span class="input-group-addon">Graphs</span>
+        <div id="select-graph-report-model">
+            <?php echo addSelectGraph($graphs_array); ?>
+        </div>
+    </div>
+    <br>
+
+    <button class="btn btn-primary" type="submit">Save</button>
   </form>
 
 
@@ -66,7 +100,6 @@ if ($_POST["create_report"]) {
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-  $error=0;
 
   $reports_list = mysql_query("SELECT * FROM drawmyreport_reports;");
   dbClose($db);

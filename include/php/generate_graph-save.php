@@ -10,15 +10,16 @@ require_once $centreon_path.'/www/class/centreonDB.class.php';
 
 session_start();
 
-if (!isset($_GET['service_id']) || !isset($_GET['session_id'])) {
+if (!isset($_GET['service']) || !isset($_GET['session_id'])) {
   exit;
  }
 
-//list($hostId, $serviceId) = explode('-', $_GET['service_id']);
+list($hostId, $serviceId) = explode('-', $_GET['service']);
 $db = new CentreonDB("centstorage");
 $res = $db->query("SELECT `id`
    FROM index_data
-       WHERE id = ".$_GET['service_id']."
+       WHERE host_id = ".$db->escape($hostId)."
+       AND service_id = ".$db->escape($serviceId)."
        LIMIT 1");
 if ($res->numRows()) {
   $row = $res->fetchRow();

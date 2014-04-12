@@ -1,8 +1,16 @@
     $(document).ready(function(){
-	function loadGraphs() {
+	function loadGraph() {
 		var image = $("#graph");
 		var thisSrc = image.attr("data-path");
 		image.attr("src", thisSrc);
+	}
+	function loadGraphs() {
+		var images = $(".graph");
+		$.each(images, function(index, value){
+console.log(value);
+			var thisSrc = $(value).attr("data-path");
+			$(value).attr("src", thisSrc);
+		});
 	}
         loadGraphs();
  

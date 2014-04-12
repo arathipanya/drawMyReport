@@ -90,6 +90,7 @@ if ($_POST["create_graph"]) {
         <input type="radio" name="create_graph[period]" value="year">
       </span>
     </div>
+    <br>
     <button class="btn btn-default" type="submit">Save</button>
   </form>
 

@@ -59,58 +59,15 @@
 <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
 
 
-<?php
-if (isset($_GET["report"])) {
-  $report_id = $_GET["report"];
-} else {
-  $report_id = 1;
-}
-  global $conf_centreon;
-  
-  $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-  
-  $reports_list = mysql_query("SELECT * FROM drawmyreport_reports WHERE id = ".$report_id.";");
+    Hello world we are <?php $contactInfo = getContactInfo(); $contact_name = $contactInfo[contact_name]; echo $contact_name; ?><br />
+<br />
 
-  $thisReport = mysql_fetch_object($reports_list);
-
-  $report_graphs_list = mysql_query("SELECT * FROM drawmyreport_report_graphs INNER JOIN drawmyreport_graphs ON drawmyreport_graphs.id = drawmyreport_report_graphs.graph_id WHERE drawmyreport_report_graphs.report_id = ".$report_id.";");
-
-  $graphs_array = array();
-  while ($row = mysql_fetch_object($report_graphs_list)) {
-    array_push($graphs_array, $row);
-  }
-
-  dbClose($db);
-?>
-<div class="container">
-    <div class="jumbotron">
-        <h1>Report <?php echo $thisReport->title ?></h1>
-        <h2><small><?php echo $thisReport->subtitle ?></small></h2>
-    </div>
-
-<?php
-for ($i = 0; $i < count($graphs_array); $i++) {
-
-  ?>
-  <div class="page-header">
-      <h1><?php echo $graphs_array[$i]->title ?></h1>
-      <h3><small><?php echo $graphs_array[$i]->period ?> - <?php echo $graphs_array[$i]->description ?></small></h3>
-  </div>
-  <img class="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service_id=<?php echo $graphs_array[$i]->data ?>&tp=<?php echo 60 * 60 * 24 ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=600"/>
-  <br>
-<br>
-  <?
- }
-?>
-
+    <img id="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service=15-30&tp=<?php echo 60 * 60 * 24 ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=900"
 
     <div class="untarget">
-<br>
-<hr>
-<br>
-    <button id="cmd" type="button" class="btn btn-default">generate PDF</button>
+        <p>This is a bootstrap button :</p>
+        <button id="cmd" type="button" class="btn btn-primary">generate PDF</button>
     </div>
-</div>
 </div>
   </body>
 </html>

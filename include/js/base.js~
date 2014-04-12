@@ -65,8 +65,10 @@
 		$("#form-create-graph").hide();
 	});
 
-	$("body").on("submit", "#form-create-graph", function(e){
-//		e.preventDefault();
-		console.log("post form");
+	$("body").on("click", ".add-graph-report", function(e){
+		e.preventDefault();
+		var model = $("#select-graph-report-model .select-parent .form-control");
+		
+		$("#select-graph-report-model").prepend(model.parent().html());
 	});
 });
