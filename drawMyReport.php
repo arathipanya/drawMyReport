@@ -35,7 +35,7 @@
 
   </head>
   <body bgcolor="#ffffff">
-<div id="target">
+<div id="target" bgcolor="#ffffff">
 
     <!-- Bootstrap -->
     <link href="./modules/drawMyReport/include/css/bootstrap.min.css" rel="stylesheet">
