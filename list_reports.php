@@ -40,6 +40,37 @@ if ($_POST["create_report"]) {
   $_POST=Array();
   dbClose($db);
 }
+
+if (isset($_POST["edit_report"])) {
+  global $conf_centreon;
+
+  $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
+  $error=0;
+
+  $result = mysql_query("UPDATE drawmyreport_reports SET name = '".$_POST["edit_report"]["name"]."', title = '".$_POST["edit_report"]["title"]."', subtitle = '".$_POST["edit_report"]["subtitle"]."' WHERE id = '".$_POST["edit_report"]["id"]."';");
+  $report_id = $_POST["edit_report"]["id"];
+
+  if (isset($_POST["edit_report"]["graphs"])) {
+    $post_graphs_array = $_POST["edit_report"]["graphs"];
+    for ($i = 0; $i < count($post_graphs_array); $i++) {
+      if ($post_graphs_array[$i] !== "-") {
+        mysql_query("INSERT INTO drawmyreport_report_graphs (report_id, graph_id) VALUES('".$report_id."','".$post_graphs_array[$i]."');");
+      }
+    }
+  }
+  
+  if (isset($_POST["edit_report"]["graphs_delete"])) {
+    $post_graphs_array = $_POST["edit_report"]["graphs_delete"];
+    for ($i = 0; $i < count($post_graphs_array); $i++) {
+      if ($post_graphs_array[$i] !== "-") {
+        mysql_query("DELETE FROM drawmyreport_report_graphs WHERE graph_id='".$post_graphs_array[$i]."' AND report_id='".$report_id."';");
+      }
+    }
+  }
+
+  $_POST=Array();
+  dbClose($db);
+}
 ?>
 
 
@@ -118,7 +149,9 @@ dbClose($db);
       <td><?php echo $row->name ?></td>
       <td><?php echo $row->title ?></td>
       <td><?php echo $row->subtitle ?></td>
-      <td><a href="./modules/drawMyReport/include/php/edit-report.php?report_id=<?php echo $row->id ?>" title="Edit" class="edit-report"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td><a href="main.php?p=90103&report=<?php echo $row->id ?>" title="See preview" class="see-report-preview"><span class="glyphicon glyphicon-play"></span></a> 
+<a href="./modules/drawMyReport/include/php/edit-report.php?report_id=<?php echo $row->id ?>" title="Edit" class="edit-report"><span class="glyphicon glyphicon-pencil"></span></a> 
+<a href="./modules/drawMyReport/include/php/delete-report.php?report_id=<?php echo $row->id ?>" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
   </tr>      
 <?php
     }

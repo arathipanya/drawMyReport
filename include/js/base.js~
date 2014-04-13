@@ -63,33 +63,93 @@
 
 	});
 
-	$(".create-graph").click(function(e) {
+	$("body").on("click", ".create-graph", function(e) {
 	    	e.preventDefault();
-	    	
+
 		$(this).hide();
 		$("#form-create-graph").show();
 	});
 
-	$(".close-create-graph").click(function(e) {
-	    	e.preventDefault();
-	    	
+	$("body").on("click", ".close-create-graph", function(e){
+		e.preventDefault();
+
 		$(".create-graph").show();
-		$("#form-create-graph").hide();
+		var target = $(this).attr('href');
+		$(target).hide();
 	});
 
 	$("body").on("click", ".add-graph-report", function(e){
 		e.preventDefault();
-		var model = $("#select-graph-report-model .select-parent .form-control");
+		var target = $(this).attr('target');
+		var model = $(target + " .select-parent .form-control");
 		
-		$("#select-graph-report-model").prepend(model.parent().html());
+		$(target).prepend(model.parent().html());
 	});
 
-	$(".edit-graph").click(function(e){
+	$("body").on("click", ".edit-graph", function(e){
 		e.preventDefault();
 	
 		var path = $(this).attr("href");
 		$.get(path, function(dataResult) {
-			$("#form-create-graph").parent().html(dataResult);
+			if (!$("#form-edit-graph").length) {
+				$("#form-create-graph").parent().append(dataResult);
+			} else {
+				$("#form-edit-graph").parent().html(dataResult);
+			}
 		});
 	});	
+
+	$("body").on("click", ".remove-graph", function(e){
+		e.preventDefault();
+
+		var confirm = window.confirm("Are you sure?");
+
+		if (confirm) {
+			var path = $(this).attr("href");
+			$.get(path, function(dataResult) {
+				location.reload();
+			});
+		} else {
+
+		}
+	});
+
+
+	$("body").on("click", ".edit-report", function(e){
+		e.preventDefault();
+
+		var path = $(this).attr("href");
+		$.get(path, function(dataResult) {
+			if (!$("#form-edit-graph").length) {
+				$("#form-create-graph").parent().append(dataResult);
+			} else {
+                                $("#form-edit-graph").parent().html(dataResult);
+			}
+		});
+	});
+
+	$("body")
+		.on("mouseover mouseout", ".label-report-graph-edit", function (e) {
+			if ($(this).attr('disabled')) {
+				$(this).attr('disabled', false);
+			} else {
+				$(this).attr('disabled', true);
+			}
+		})
+		.on("click", ".label-report-graph-edit", function (e) {
+			if ($(this).attr('disabled')) {
+                                $(this).attr('disabled', false);
+			} else {
+		                $(this).attr('disabled', true);
+                        }
+                });
+
+	$("body").on("submit", ".to-be-checked.report-edit-form", function (e) {
+		$.each($(".label-report-graph-edit"), function(key, label) {
+			if ($(label).attr("disabled") == undefined) {
+				var forattr = $(label).attr("for");
+				$(forattr).attr("name", "");
+			}
+		})
+	});
 });

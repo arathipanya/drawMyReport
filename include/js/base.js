@@ -42,9 +42,9 @@
 
 	    html2canvas(target, {
 		onrendered: function(canvas) {
-		    var img = canvas.toDataURL("image/png")
+		    var img = canvas.toDataURL("image/jpeg")
 
-		    capture.img = canvas.toDataURL( "image/png" );
+		    capture.img = canvas.toDataURL( "image/jpeg" );
 
 		    w.window.location.href = capture.img;
 		/*
@@ -80,9 +80,10 @@
 
 	$("body").on("click", ".add-graph-report", function(e){
 		e.preventDefault();
-		var model = $("#select-graph-report-model .select-parent .form-control");
+		var target = $(this).attr('target');
+		var model = $(target + " .select-parent .form-control");
 		
-		$("#select-graph-report-model").prepend(model.parent().html());
+		$(target).prepend(model.parent().html());
 	});
 
 	$("body").on("click", ".edit-graph", function(e){
@@ -105,10 +106,68 @@
 
 		if (confirm) {
 			var path = $(this).attr("href");
-			$.get(path, function(dataResult) {console.log(dataResult)});
-			location.reload();
+			$.get(path, function(dataResult) {
+				location.reload();
+			});
 		} else {
 
 		}
-	});	
+	});
+
+
+	$("body").on("click", ".edit-report", function(e){
+		e.preventDefault();
+
+		var path = $(this).attr("href");
+		$.get(path, function(dataResult) {
+			if (!$("#form-edit-graph").length) {
+				$("#form-create-graph").parent().append(dataResult);
+			} else {
+                                $("#form-edit-graph").parent().html(dataResult);
+			}
+		});
+	});
+
+	$("body")
+		.on("mouseover mouseout", ".label-report-graph-edit", function (e) {
+			if ($(this).attr('disabled')) {
+				$(this).attr('disabled', false);
+			} else {
+				$(this).attr('disabled', true);
+			}
+		})
+		.on("click", ".label-report-graph-edit", function (e) {
+			if ($(this).attr('disabled')) {
+                                $(this).attr('disabled', false);
+			} else {
+		                $(this).attr('disabled', true);
+                        }
+                });
+
+	$("body").on("submit", ".to-be-checked.report-edit-form", function (e) {
+		$.each($(".label-report-graph-edit"), function(key, label) {
+			if ($(label).attr("disabled") == undefined) {
+				var forattr = $(label).attr("for");
+				$(forattr).attr("name", "");
+			}
+		})
+	});
+
+	$("body").on("change", ".select-parent select", function(e) {
+		var thisElem = $(this);
+		var thisName = thisElem.attr('name');
+		var path = "./modules/drawMyReport/include/php/getIndexData.php?";
+		var selects = $(".select-parent select");
+
+		$.each(selects, function(key, thisSelect) {
+			var thisValue = $(thisSelect).val();
+			if ($(thisSelect).attr("name") == "sg" && thisValue !== '-')	path += "&sg_id=" + thisValue;
+			if ($(thisSelect).attr("name") == "service" && thisValue !== '-') path += "&service_id=" + thisValue;
+			if ($(thisSelect).attr("name") == "host" && thisValue !== '-') path += "&host_id=" + thisValue;
+		});
+		
+		$.get(path, function(dataResult) {
+			$("#index-data-select").html(dataResult);
+		});
+	});
 });

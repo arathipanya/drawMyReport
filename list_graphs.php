@@ -1,7 +1,8 @@
 <?php
 include './modules/drawMyReport/DB-Func.php';
-include './modules/drawMyReport/include/php/graphs-func.php';
+include './modules/drawMyReport/include/php/getIndexData.php';
 
+/*
 function getIndexData() {
   global $conf_centreon;
 
@@ -19,7 +20,7 @@ function getIndexData() {
   dbClose($db);
   return $str;
 }
-
+*/
 
 ?>
 
@@ -130,7 +131,7 @@ if (isset($_POST["edit_graph"])) {
 
     <div class="input-group-btn">
         <span class="input-group-addon">Service/host</span>
-        <div>
+        <div id="index-data-select">
            <?php echo getIndexData() ?>
         </div>
     </div>
@@ -171,7 +172,8 @@ if (isset($_POST["edit_graph"])) {
       <td><?php echo $row->description ?></td>
       <td><?php echo $row->type ?></td>
       <td><?php echo $row->period ?></td>
-      <td><a href="./modules/drawMyReport/include/php/edit-graph.php?graph_id=<?php echo $row->id ?>" title="Edit" class="edit-graph"><span class="glyphicon glyphicon-pencil"></span></a> <a href="./modules/drawMyReport/include/php/delete-graph.php?graph_id=<?php echo $row->id ?>" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td><a href="./modules/drawMyReport/include/php/edit-graph.php?graph_id=<?php echo $row->id ?>" title="Edit" class="edit-graph"><span class="glyphicon glyphicon-pencil"></span></a> 
+<a href="./modules/drawMyReport/include/php/delete-graph.php?graph_id=<?php echo $row->id ?>" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
   </tr>      
 <?php
     }

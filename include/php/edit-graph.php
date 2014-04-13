@@ -1,7 +1,6 @@
 <?php
   //$filepath = '@CENTREON_ETC@/centreon.conf.php';
 $filepath = '/etc/centreon/centreon.conf.php';
-include './graphs-func.php';
 
 if (file_exists($filepath)) {
   include($filepath);
