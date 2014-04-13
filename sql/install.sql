@@ -1,9 +1,9 @@
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'DrawMyReport', NULL, 9, 901, 100, 1, './modules/drawMyReport/drawMyReport.php', NULL, '0', '1', '1');
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Home', NULL, 9, 901, 100, 1, './modules/drawMyReport/drawMyReport.php', NULL, '0', '1', '1');
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Graphs', NULL, 901, 90104, 100, 1, './modules/drawMyReport/list_graphs.php', NULL, '0', '1', '1');
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Reports', NULL, 901, 90105, 100, 1, './modules/drawMyReport/list_reports.php', NULL, '0', '1', '1');
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Emails', NULL, 901, 90106, 100, 1, './modules/drawMyReport/list_reports.php', NULL, '0', '1', '1');
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Previews', NULL, 901, 90103, 100, 1, './modules/drawMyReport/drawMyReport.php', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'DrawMyReport', NULL, NULL, 9, 90, 1, '', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Home', NULL, 9, 901, 10, 1, '', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Graphs', NULL, 901, 90104, 10, 1, './modules/drawMyReport/list_graphs.php', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Reports', NULL, 901, 90105, 20, 1, './modules/drawMyReport/list_reports.php', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Emails', NULL, 901, 90106, 30, 1, './modules/drawMyReport/list_emails.php', NULL, '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Previews', NULL, 901, 90103, 40, 1, './modules/drawMyReport/drawMyReport.php', NULL, '0', '1', '1');
 
 
 CREATE TABLE IF NOT EXISTS `drawmyreport_graphs` (
@@ -54,5 +54,12 @@ CREATE TABLE IF NOT EXISTS `drawmyreport_emails_users` (
   `id` int(11) NOT NULL auto_increment,
   `email_id` int(11) DEFAULT '0' NOT NULL,
   `user_id` int(11) DEFAULT '0' NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `drawmyreport_email_reports` (
+  `id` int(11) NOT NULL auto_increment,
+  `email_id` int(11) DEFAULT '0' NOT NULL,
+  `report_id` int(11) DEFAULT '0' NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

@@ -90,13 +90,16 @@ if (isset($_GET["report"])) {
 
 <?php
 for ($i = 0; $i < count($graphs_array); $i++) {
-
+  $tp = 60 * 60 * 24; //one day
+  if ($graphs_array[$i]->period == "week") $tp = 60*60*24*7;
+  if ($graphs_array[$i]->period == "month") $tp = 60*60*24*31;
+  if ($graphs_array[$i]->period == "year") $tp = 60*60*24*365;
   ?>
   <div class="page-header">
       <h1><?php echo $graphs_array[$i]->title ?></h1>
       <h3><small><?php echo $graphs_array[$i]->period ?> - <?php echo $graphs_array[$i]->description ?></small></h3>
   </div>
-  <img class="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service_id=<?php echo $graphs_array[$i]->data ?>&tp=<?php echo 60 * 60 * 24 ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=600"/>
+  <img class="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service_id=<?php echo $graphs_array[$i]->data ?>&tp=<?php echo $tp ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=600"/>
   <br>
 <br>
   <?

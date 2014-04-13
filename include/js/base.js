@@ -42,11 +42,10 @@
 
 	    html2canvas(target, {
 		onrendered: function(canvas) {
-		    var img = canvas.toDataURL("image/jpeg")
+		    var img = canvas.toDataURL("image/png")
+		    //capture.img = canvas.toDataURL( "image/jpeg" );
 
-		    capture.img = canvas.toDataURL( "image/jpeg" );
-
-		    w.window.location.href = capture.img;
+		    w.window.location.href = img;
 		/*
 		    capture.data = { 'image' : capture.img };
           		$.ajax({
@@ -168,6 +167,41 @@
 		
 		$.get(path, function(dataResult) {
 			$("#index-data-select").html(dataResult);
+		});
+	});
+
+	$("body").on("click", ".open-form", function (e) {
+		e.preventDefault();
+
+		var target = $(this).attr("href");
+		$(target).parent().attr("hidden", false);
+	});
+
+	$("body").on("click", ".close-form", function (e) {
+		e.preventDefault();
+
+		var target = $(this).attr("href");
+		$(target).parent().attr("hidden", true);
+	});
+
+	$("body").on("submit", "#create-user-form", function (e) {
+		e.preventDefault();
+		
+		var str = $(this).serialize();
+		console.log(str);
+		$.post("./modules/drawMyReport/include/php/create-user.php", str, function(dataResult) {
+			console.log("dataResult", dataResult);
+			$("#select-graph-report-model").prepend(dataResult);
+		});
+	});
+
+	$("body").on("click", ".remove-user", function(e) {
+		e.preventDefault();
+
+		var thisElem = $(this);
+		var path = thisElem.attr("href");
+		$.get(path, function(dataResult) {
+			thisElem.parent().parent().remove();
 		});
 	});
 });

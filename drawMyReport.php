@@ -35,7 +35,7 @@
 
   </head>
   <body bgcolor="#ffffff">
-<div id="target" bgcolor="#ffffff">
+<div id="target" style="background-color:#ffffff;">
 
     <!-- Bootstrap -->
     <link href="./modules/drawMyReport/include/css/bootstrap.min.css" rel="stylesheet">
@@ -84,7 +84,7 @@ if (isset($_GET["report"])) {
 ?>
 <div class="container">
     <div class="jumbotron">
-        <h1>Report <?php echo $thisReport->title ?></h1>
+        <h1><?php echo $thisReport->title ?></h1>
         <h2><small><?php echo $thisReport->subtitle ?></small></h2>
     </div>
 
