@@ -88,7 +88,7 @@ function addSelectGraph($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.' - '.$graphs_array[$i]->email.'</options>';
   }
 
-  $str .= '</select></div><br><button class="btn-xs btn btn-default add-graph-report" target="#select-graph-report-model">Add an user</button>';
+  $str .= '</select></div><br><button class="btn-xs btn btn-primary add-graph-report" target="#select-graph-report-model">Add an user</button>';
   return $str;
 }
 
@@ -99,7 +99,7 @@ function addSelectReport($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.' - '.$graphs_array[$i]->title.'</options>';
   }
 
-  $str .= '</select></div><br><button class="btn btn-xs btn-default add-graph-report" target="#select-report-model">Add a report</button>';
+  $str .= '</select></div><br><button class="btn btn-xs btn-primary add-graph-report" target="#select-report-model">Add a report</button>';
   return $str;
 }
 ?>
