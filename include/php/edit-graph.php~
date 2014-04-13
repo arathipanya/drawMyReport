@@ -21,7 +21,7 @@ if (file_exists($filepath)) {
       mysql_select_db($conf_centreon['dbcstg']) or die('getIndexData : Impossible de trouver la base de donnees '.mysql_error());
       $service_groups_list = mysql_query('SELECT * FROM index_data ORDER BY service_description');
 
-      $str = '<div class="select-parent"><select disabled type="text" class="form-control" name="edit_graph[data]" placeholder="Select a service">
+      $str = '<div class="select-parent"><select type="text" class="form-control" name="edit_graph[data]" placeholder="Select a service">
           <option value="-">- Select a service/host</option>';
 
       while ($row = mysql_fetch_object($service_groups_list)) {
@@ -60,53 +60,47 @@ if (file_exists($filepath)) {
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Type</span>
-      <div class="input-group input-group-radio">
-        <span class="input-group-addon-radio">
-          <label for="edit-type1">type 1</label>
-          <input id="edit-type1" type="radio" name="edit_graph[type]" <?php if ($data->type == "type1") echo "checked"; ?> value="type1">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-type2">type 2</label>
-          <input id="edit-type2" type="radio" name="edit_graph[type]" <?php if ($data->type == "type2") echo "checked"; ?> value="type2">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-type3">type 3</label>
-          <input id="edit-type3" type="radio" name="edit_graph[type]" <?php if ($data->type == "type3") echo "checked"; ?> value="type3">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-type4">type 4</label>
-          <input id="edit-type4" type="radio" name="edit_graph[type]" <?php if ($data->type == "type4") echo "checked"; ?> value="type4">
-        </span>
-      </div>
+      <span class="input-group-addon">
+        type1
+   <input type="radio" name="edit_graph[type]" <?php if ($data->type == "type1") echo "checked"; ?> value="type1">
+      </span>
+      <span class="input-group-addon">
+        type2
+      <input type="radio" name="edit_graph[type]" <?php if ($data->type == "type2") echo "checked"; ?> value="type2">
+      </span>
+      <span class="input-group-addon">
+        type3
+      <input type="radio" name="edit_graph[type]" <?php if ($data->type == "type3") echo "checked"; ?> value="type3">
+      </span>
+      <span class="input-group-addon">
+        type4
+      <input type="radio" name="edit_graph[type]" <?php if ($data->type == "type4") echo "checked"; ?> value="type4">
+      </span>
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Period</span>
-      <div class="input-group input-group-radio">
-        <span class="input-group-addon-radio">
-          <label for="edit-period1">day</label>
-          <input id="edit-period1" type="radio" name="edit_graph[period]" <?php if ($data->period == "day") echo "checked"; ?> value="day">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-period2">week</label>
-          <input id="edit-period2" type="radio" name="edit_graph[period]" <?php if ($data->period == "week") echo "checked"; ?> value="week">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-period3">month</label>
-          <input id="edit-period3" type="radio" name="edit_graph[period]" <?php if ($data->period == "month") echo "checked"; ?> value="month">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="edit-period4">year</label>
-          <input id="edit-period4" type="radio" name="edit_graph[period]" <?php if ($data->period == "year") echo "checked"; ?> value="year">
-        </span>
-      </div>
+      <span class="input-group-addon">
+        day
+      <input type="radio" name="edit_graph[period]" <?php if ($data->period == "day") echo "checked"; ?> value="day">
+      </span>
+      <span class="input-group-addon">
+        week
+        <input type="radio" name="edit_graph[period]" <?php if ($data->period == "week") echo "checked"; ?> value="week">
+      </span>
+      <span class="input-group-addon">
+        month
+        <input type="radio" name="edit_graph[period]" <?php if ($data->period == "month") echo "checked"; ?> value="month">
+      </span>
+      <span class="input-group-addon">
+        year
+        <input type="radio" name="edit_graph[period]" <?php if ($data->period == "year") echo "checked"; ?> value="year">
+      </span>
     </div>
     <br>
 
-    <div class="input-group">
-        <span class="input-group-addon">Service - Host</span>
-        <div class="form-control">
+    <div class="input-group-btn">
+        <span class="input-group-addon">Service/host</span>
+        <div>
         <?php echo getIndexData(); ?>
         </div>
     </div>

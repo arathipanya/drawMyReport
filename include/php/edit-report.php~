@@ -16,7 +16,7 @@ function addSelectGraph($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.'</options>';
   }
 
-  $str .= '</select></div><br><button class="btn btn-xs btn-primary add-graph-report" target="#select-graph-report-model-edit">Add a graph</button>';
+  $str .= '</select></div><br><button class="xs-btn btn-default add-graph-report" target="#select-graph-report-model-edit">Add a graph</button>';
   return $str;
 }
 
@@ -71,16 +71,16 @@ function showSelectedGraphs() {
   }
 
 ?>
-    <div class="input-group" id="select-graphs-list-report">
+    <div class="input-group-btn" id="select-graphs-list-report">
         <span class="input-group-addon">Graphs</span>
-        <div class="form-control" id="select-graph-report-model-edit">
+        <div id="select-graph-report-model-edit">
        <?php echo showSelectedGraphs(); ?>
        <?php echo addSelectGraph($graphs_array); ?>
         </div>
     </div>
     <br>
 
-    <button class="btn btn-default" type="submit">Save</button>
+    <button class="btn btn-primary" type="submit">Save</button>
   </form>
 </div>
 <?php } ?>

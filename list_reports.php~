@@ -1,6 +1,5 @@
 <!-- Bootstrap -->
     <link href="./modules/drawMyReport/include/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./modules/drawMyReport/include/css/drawmyreport.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 
     <script src="./modules/drawMyReport/include/js/bootstrap.min.js"></script>
@@ -75,10 +74,57 @@ if (isset($_POST["edit_report"])) {
 ?>
 
 
-
-
 <div class="container">
-<h4><a href="#" class="btn btn-xs btn-default create-graph">Create a report</a></h4>
+
+<a href="#" class="create-graph">Create a report</a>
+<div>
+<form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
+  <h3>New report <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
+    <div class="input-group">
+      <span class="input-group-addon">Name</span>
+      <input type="text" class="form-control" name="create_report[name]" placeholder="Name">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Title</span>
+      <input type="text" class="form-control" name="create_report[title]" placeholder="Title">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Subtitle</span>
+      <input type="text" class="form-control" name="create_report[subtitle]" placeholder="Description">
+    </div>
+    <br>
+
+<?php
+global $conf_centreon;
+
+$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
+$graphs_list = mysql_query("SELECT * FROM drawmyreport_graphs;");
+$graphs_array = array();
+
+while ($graph_row = mysql_fetch_object($graphs_list)) {
+  array_push($graphs_array, $graph_row);
+}
+
+dbClose($db);
+
+?>
+    <div class="input-group-btn" id="select-graphs-list-report">
+        <span class="input-group-addon">Graphs</span>
+        <div id="select-graph-report-model">
+            <?php echo addSelectGraph($graphs_array); ?>
+        </div>
+    </div>
+    <br>
+
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>
+
+<hr>
+
+
 <div class="col-lg-12">
     <h4>List of reports</h4>
 <?php 
@@ -113,52 +159,4 @@ if (isset($_POST["edit_report"])) {
 </table>
 </div>
 
-</div>
-
-<div class="container">
-
-<h4><a href="#" class="btn btn-xs btn-default create-graph">Create a report</a></h4>
-
-<form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
-  <h3>New report <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
-    <div class="input-group">
-      <span class="input-group-addon">Name</span>
-      <input type="text" class="form-control" name="create_report[name]" placeholder="Name">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Title</span>
-      <input type="text" class="form-control" name="create_report[title]" placeholder="Title">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Subtitle</span>
-      <input type="text" class="form-control" name="create_report[subtitle]" placeholder="Description">
-    </div>
-    <br>
-
-<?php
-global $conf_centreon;
-
-$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-$graphs_list = mysql_query("SELECT * FROM drawmyreport_graphs;");
-$graphs_array = array();
-
-while ($graph_row = mysql_fetch_object($graphs_list)) {
-  array_push($graphs_array, $graph_row);
-}
-
-dbClose($db);
-
-?>
-    <div class="input-group" id="select-graphs-list-report">
-        <span class="input-group-addon">Graphs</span>
-        <div class="form-control" id="select-graph-report-model">
-            <?php echo addSelectGraph($graphs_array); ?>
-        </div>
-    </div>
-    <br>
-
-    <button class="btn btn-default" type="submit">Save</button>
-  </form>
 </div>

@@ -70,9 +70,81 @@ if (isset($_POST["edit_graph"])) {
 ?>
 
 
+<div class="container">
 
-<div class=container>
-<h4><a href="#" class="btn-xs btn btn-default create-graph">Create a graph</a></h4>
+<a href="#" class="create-graph">Create a graph</a>
+<div>
+<form hidden class="form col-lg-6" role="form" id="form-create-graph" method="post" action="">
+  <h3>New graph <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
+    <div class="input-group">
+      <span class="input-group-addon">Name</span>
+      <input type="text" class="form-control" name="create_graph[name]" placeholder="Name">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Title</span>
+      <input type="text" class="form-control" name="create_graph[title]" placeholder="Title">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Description</span>
+      <input type="text" class="form-control" name="create_graph[description]" placeholder="Description">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">
+        type1
+        <input type="radio" name="create_graph[type]" checked value="type1">
+      </span>
+      <span class="input-group-addon">
+        type2
+        <input type="radio" name="create_graph[type]" value="type2">
+      </span>
+      <span class="input-group-addon">
+        type3
+        <input type="radio" name="create_graph[type]" value="type3">
+      </span>
+      <span class="input-group-addon">
+        type4
+        <input type="radio" name="create_graph[type]" value="type4">
+      </span>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">
+        day
+        <input type="radio" name="create_graph[period]" checked value="day">
+      </span>
+      <span class="input-group-addon">
+        week
+        <input type="radio" name="create_graph[period]" value="week">
+      </span>
+      <span class="input-group-addon">
+        month
+        <input type="radio" name="create_graph[period]" value="month">
+      </span>
+      <span class="input-group-addon">
+        year
+        <input type="radio" name="create_graph[period]" value="year">
+      </span>
+    </div>
+    <br>
+
+    <div class="input-group-btn">
+        <span class="input-group-addon">Service/host</span>
+        <div id="index-data-select">
+           <?php echo getIndexData() ?>
+        </div>
+    </div>
+    <div id="load-services"></div>
+    <br>
+    <button class="btn btn-default" type="submit">Save</button>
+  </form>
+</div>
+
+
+<hr>
+
 <div class="col-lg-12">
     <h4>List of graphs</h4>
 <?php 
@@ -111,85 +183,3 @@ if (isset($_POST["edit_graph"])) {
 </div>
 
 </div>
-
-
-<div class="container">
-
-<h4><a href="#" class="btn-xs btn btn-default create-graph">Create a graph</a></h4>
-
-<form hidden class="form col-lg-6" role="form" id="form-create-graph" method="post" action="">
-  <h3>New graph <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
-    <div class="input-group">
-      <span class="input-group-addon">Name</span>
-      <input type="text" class="form-control" name="create_graph[name]" placeholder="Name">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Title</span>
-      <input type="text" class="form-control" name="create_graph[title]" placeholder="Title">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Description</span>
-      <input type="text" class="form-control" name="create_graph[description]" placeholder="Description">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Type</span>
-      <div class="input-group input-group-radio">
-        <span class="input-group-addon-radio">
-          <label for="type1">type 1</label>
-          <input id="type1" type="radio" name="create_graph[type]" checked value="type1">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="type2">type 2</label>
-          <input id="type2" type="radio" name="create_graph[type]" value="type2">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="type3">type 3</label>
-          <input id="type3" type="radio" name="create_graph[type]" value="type3">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="type4">type 4</label>
-          <input id="type4" type="radio" name="create_graph[type]" value="type4">
-        </span>
-      </div>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Period</span>
-      <div class="input-group input-group-radio">
-        <span class="input-group-addon-radio">
-          <label for="period1">day</label>
-          <input type="radio" id="period1" name="create_graph[period]" checked value="day">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="period2">week</label>
-          <input type="radio" id="period2" name="create_graph[period]" value="week">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="period3">month</label>
-          <input type="radio" id="period3" name="create_graph[period]" value="month">
-        </span>
-        <span class="input-group-addon-radio">
-          <label for="period4">month</label>
-          <input type="radio" id="period4" name="create_graph[period]" value="year">
-        </span>
-      </div>
-    </div>
-    <br>
-
-    <div class="input-group">
-        <span class="input-group-addon">Service - Host</span>
-        <div id="index-data-select" class="form-control">
-           <?php echo getIndexData() ?>
-        </div>
-      <div id="load-services"></div>
-    </div>
-    <br>
-    <button class="btn btn-default" type="submit">Save</button>
-  </form>
-</div>
-
-
-

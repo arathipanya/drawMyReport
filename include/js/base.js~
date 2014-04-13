@@ -87,7 +87,7 @@
 		$(target).prepend(model.parent().html());
 	});
 
-	$("body").on("click", ".edit-graph, .edit-report", function(e){
+	$("body").on("click", ".edit-graph", function(e){
 		e.preventDefault();
 	
 		var path = $(this).attr("href");
@@ -117,6 +117,20 @@
 		} else {
 
 		}
+	});
+
+
+	$("body").on("click", ".edit-report", function(e){
+		e.preventDefault();
+
+		var path = $(this).attr("href");
+		$.get(path, function(dataResult) {
+			if (!$("#form-edit-graph").length) {
+				$("#form-create-graph").parent().append(dataResult);
+			} else {
+                                $("#form-edit-graph").parent().html(dataResult);
+			}
+		});
 	});
 
 	$("body")

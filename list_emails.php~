@@ -1,6 +1,5 @@
 <!-- Bootstrap -->
     <link href="./modules/drawMyReport/include/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./modules/drawMyReport/include/css/drawmyreport.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 
     <script src="./modules/drawMyReport/include/js/bootstrap.min.js"></script>
@@ -88,7 +87,7 @@ function addSelectGraph($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.' - '.$graphs_array[$i]->email.'</options>';
   }
 
-  $str .= '</select></div><br><button class="btn-xs btn btn-default add-graph-report" target="#select-graph-report-model">Add an user</button>';
+  $str .= '</select></div><br><button class="xs-btn btn-default add-graph-report" target="#select-graph-report-model">Add an user</button>';
   return $str;
 }
 
@@ -99,17 +98,130 @@ function addSelectReport($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.' - '.$graphs_array[$i]->title.'</options>';
   }
 
-  $str .= '</select></div><br><button class="btn btn-xs btn-default add-graph-report" target="#select-report-model">Add a report</button>';
+  $str .= '</select></div><br><button class="xs-btn btn-default add-graph-report" target="#select-report-model">Add a report</button>';
   return $str;
 }
 ?>
 
 
-
-
-
 <div class="container">
-<h4><a href="#" class="btn btn-xs btn-default create-graph">Create an email</a></h4>
+
+<a href="#" class="create-graph">Create an email</a>
+<div>
+<form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
+  <h3>New email <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
+    <div class="input-group">
+      <span class="input-group-addon">Name</span>
+      <input type="text" class="form-control" name="create_email[name]" placeholder="Name">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Title</span>
+      <input type="text" class="form-control" name="create_email[title]" placeholder="Title">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Date of first sending</span>
+      <input type="text" class="form-control" name="create_email[date_first_send]" placeholder="yyyy-mm-dd hh:mm:ss">
+    </div>
+<?php
+$myGetDate = getdate();
+$thisDate = $myGetDate[year].'-'.$myGetDate[mon].'-'.$myGetDate[mday].' '.$myGetDate[hours].':'.$myGetDate[minutes].':'.$myGetDate[seconds];
+?>
+    <input type="hidden" class="form-control" name="create_email[date_last_modification]" value="<?php echo $thisDate; ?>">
+    <br>
+
+<?php
+global $conf_centreon;
+
+$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
+$graphs_list = mysql_query("SELECT * FROM drawmyreport_users ORDER BY name;");
+$graphs_array = array();
+
+while ($graph_row = mysql_fetch_object($graphs_list)) {
+  array_push($graphs_array, $graph_row);
+}
+
+$reports_list = mysql_query("SELECT * FROM drawmyreport_reports ORDER BY name;");
+$reports_array = array();
+
+while ($graph_row = mysql_fetch_object($reports_list)) {
+  array_push($reports_array, $graph_row);
+}
+
+dbClose($db);
+
+?>
+    <div class="input-group-btn" id="select-graphs-list-report">
+        <span class="input-group-addon">Users</span> <a href="#create-user-form" class="open-form">create / edit an user</a>
+        <div id="select-graph-report-model">
+            <?php echo addSelectGraph($graphs_array); ?>
+        </div>
+    </div>
+    <br>
+
+    <div class="input-group-btn" id="select-reports-list-email">
+        <span class="input-group-addon">Reports</span>
+        <div id="select-report-model">
+            <?php echo addSelectReport($reports_array); ?>
+        </div>
+    </div>
+    <br>
+
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>
+<div hidden class="col-lg-6">
+        <form class="form" role="form" id="create-user-form" method="post" action="">
+            <h3>Create an user <a href="#create-user-form" class="close-form" title="close form">close</a></h3>
+            <div class="input-group">
+            <span class="input-group-addon">Name</span>
+                <input type="text" class="form-control" name="create_user[name]" placeholder="Name">
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">Email</span>
+                <input type="text" class="form-control" name="create_user[email]" placeholder="Email">
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </form>
+
+<div class="">
+<h4>List of users</h4>
+<?php 
+	global $conf_centreon;
+
+$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
+
+  $reports_list = mysql_query("SELECT * FROM drawmyreport_users ORDER BY name;");
+  dbClose($db);
+?>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+<?php
+    while ($row = mysql_fetch_object($reports_list)) {
+?>
+  <tr data-topic-id="<?php echo $row->id ?>">
+      <td><?php echo $row->name ?></td>
+      <td><?php echo $row->email ?></td>
+      <td><a href="./modules/drawMyReport/include/php/create-user.php?delete=true&user_id=<?php echo $row->id ?>" title="Delete" class="remove-user"><span class="glyphicon glyphicon-trash"></span></a></td>
+  </tr>      
+<?php
+    }
+?>
+</table>
+</div>
+
+</div>
+
+<hr>
+
+
 <div class="col-lg-12">
     <h4>List of emails</h4>
 <?php 
@@ -145,128 +257,5 @@ function addSelectReport($graphs_array) {
 ?>
 </table>
 </div>
-</div>
-
-
-
-<div class="container col-lg-12">
-<h4><a href="#" class="btn btn-xs btn-default create-graph">Create an email</a></h4>
-<div class="col-lg-6 col-md-12">
-<form class="form col-lg-12" hidden role="form" id="form-create-graph" method="post" action="">
-  <h3>New email <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
-    <div class="input-group">
-      <span class="input-group-addon">Name</span>
-      <input type="text" class="form-control" name="create_email[name]" placeholder="Name">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Title</span>
-      <input type="text" class="form-control" name="create_email[title]" placeholder="Title">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Date of<br>first sending</span>
-      <input type="text" class="form-control" name="create_email[date_first_send]" placeholder="yyyy-mm-dd hh:mm:ss">
-    </div>
-<?php
-$myGetDate = getdate();
-$thisDate = $myGetDate[year].'-'.$myGetDate[mon].'-'.$myGetDate[mday].' '.$myGetDate[hours].':'.$myGetDate[minutes].':'.$myGetDate[seconds];
-?>
-    <input type="hidden" class="form-control" name="create_email[date_last_modification]" value="<?php echo $thisDate; ?>">
-    <br>
-
-<?php
-global $conf_centreon;
-
-$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-$graphs_list = mysql_query("SELECT * FROM drawmyreport_users ORDER BY name;");
-$graphs_array = array();
-
-while ($graph_row = mysql_fetch_object($graphs_list)) {
-  array_push($graphs_array, $graph_row);
-}
-
-$reports_list = mysql_query("SELECT * FROM drawmyreport_reports ORDER BY name;");
-$reports_array = array();
-
-while ($graph_row = mysql_fetch_object($reports_list)) {
-  array_push($reports_array, $graph_row);
-}
-
-dbClose($db);
-
-?>
-    <div class="input-group" id="select-graphs-list-report">
-        <span class="input-group-addon">Users</span>
-
-        <div id="select-graph-report-model" class="input-group form-control">
-            <?php echo addSelectGraph($graphs_array); ?>
-            <br><a href="#create-user-form" class="open-form">create / edit an user</a>
-        </div>
-        
-    </div>
-    <br>
-
-    <div class="input-group" id="select-reports-list-email">
-        <span class="input-group-addon">Reports</span>
-        <div id="select-report-model" class="input-group form-control">
-            <?php echo addSelectReport($reports_array); ?>
-        </div>
-    </div>
-    <br>
-
-    <button class="btn btn-default" type="submit">Save</button>
-  </form>
-</div>
-
-
-<div hidden class="col-lg-6 col-md-12" style="">
-        <form class="form" role="form" id="create-user-form" method="post" action="">
-            <h3>Create an user <a href="#create-user-form" class="close-form" title="close form">close</a></h3>
-            <div class="input-group">
-            <span class="input-group-addon">Name</span>
-                <input type="text" class="form-control" name="create_user[name]" placeholder="Name">
-            </div>
-            <br>
-            <div class="input-group">
-            <span class="input-group-addon">Email</span>
-                <input type="text" class="form-control" name="create_user[email]" placeholder="Email">
-            </div>
-            <br>
-            <button class="btn btn-default" type="submit">Create</button>
-        </form>
-
-<div class="">
-<h4>List of users</h4>
-<?php 
-	global $conf_centreon;
-
-$db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-
-  $reports_list = mysql_query("SELECT * FROM drawmyreport_users ORDER BY name;");
-  dbClose($db);
-?>
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Actions</th>
-  </tr>
-<?php
-    while ($row = mysql_fetch_object($reports_list)) {
-?>
-  <tr data-topic-id="<?php echo $row->id ?>">
-      <td><?php echo $row->name ?></td>
-      <td><?php echo $row->email ?></td>
-      <td><a href="./modules/drawMyReport/include/php/create-user.php?delete=true&user_id=<?php echo $row->id ?>" title="Delete" class="remove-user"><span class="glyphicon glyphicon-trash"></span></a></td>
-  </tr>      
-<?php
-    }
-?>
-</table>
-</div>
-</div>
-
 
 </div>
-
