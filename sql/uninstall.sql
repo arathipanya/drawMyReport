@@ -5,6 +5,7 @@ DELETE FROM `topology` WHERE `topology_page` = '901';
 DELETE FROM `topology` WHERE `topology_page` = '90103';
 DELETE FROM `topology` WHERE `topology_page` = '90104';
 DELETE FROM `topology` WHERE `topology_page` = '90105';
+DELETE FROM `topology` WHERE `topology_page` = '90106';
 
 DROP TABLE `drawmyreport_graphs`;
 DROP TABLE `drawmyreport_emails`;

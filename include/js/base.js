@@ -156,7 +156,7 @@
 	$("body").on("change", ".select-parent select", function(e) {
 		var thisElem = $(this);
 		var thisName = thisElem.attr('name');
-		var path = "./modules/drawMyReport/include/php/getIndexData.php?";
+		var path = "./modules/drawMyReport/include/php/getIndexData.php?raz=false";
 		var selects = $(".select-parent select");
 
 		$.each(selects, function(key, thisSelect) {

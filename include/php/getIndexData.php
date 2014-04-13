@@ -12,10 +12,8 @@ if (file_exists($filepath)) {
     $sql = mysql_query('SELECT * FROM servicegroup');
     
     $str = '<div class="select-parent"><select type="text" class="form-control" name="sg" placeholder="Select a service group">';
-    if (!$sg_id) {
-        $str .= '<option value="-">- service group</option>';
-    }
-
+    $str .= '<option value="-">- service group</option>';
+    
     while ($row = mysql_fetch_object($sql)) {
           if ($row->sg_id == $sg_id) {
               $str .= '<option selected value="'.$row->sg_id.'">'.$row->sg_name.'    -    '.$row->sg_alias.'</options>';
@@ -37,7 +35,8 @@ if (file_exists($filepath)) {
     $sql = mysql_query('SELECT service_id, service_description, service_alias FROM service');
     
     $str = '<div class="select-parent"><select type="text" class="form-control" name="service" placeholder="Select a service">';
-    if (!$service_id) $str .= '<option value="-">- service</option>';
+    $str .= '<option value="-">- service</option>';
+
     while ($row = mysql_fetch_object($sql)) {
           if ($service_id == $row->service_id) 
 	  {
@@ -98,7 +97,7 @@ if (file_exists($filepath)) {
     $sql = mysql_query('SELECT host_id, host_name, host_address FROM host');
     
     $str = '<div class="select-parent"><select type="text" class="form-control" name="host" placeholder="Select a host">';
-    if (!$host_id) $str .= '<option value="-">- host</option>';
+    $str .= '<option value="-">- host</option>';
     while ($row = mysql_fetch_object($sql)) {
           if ($host_id == $row->host_id) 
           {	  
@@ -120,7 +119,7 @@ if (file_exists($filepath)) {
         echo getServiceGroups();
         echo getServices();
         echo getHosts();
-	echo '<div class="btn-group" data-toggle="buttons"></div>';
+	echo '<br><div class="btn-group" data-toggle="buttons">Please select a service or a host</div>';
     }
 
 
@@ -133,13 +132,16 @@ if (file_exists($filepath)) {
     $sql = mysql_query("SELECT * FROM index_data WHERE service_id='".$service_id."' AND host_id='".$host_id."';");
 
 
-    $str = '<div class="btn-group" data-toggle="buttons">';
+    $str = '<br><div class="btn-group" data-toggle="buttons">';
     
+    $counter = 0;
     while ($row = mysql_fetch_object($sql)) {
+          $counter++;
           $str .= '<label class="btn btn-primary">
                    <input type="radio" name="create_graph[data]" value="'.$row->id.'" id="edit-graph-data-'.$row->id.'"> '.$row->host_name.' - '.$row->service_description.'
                    </label>';
     }
+    if ($counter == 0) $str .= "Things don't match";
     $str .= '</div><br>';
 
     return $str;
@@ -154,13 +156,16 @@ if (file_exists($filepath)) {
     $sql = mysql_query("SELECT * FROM index_data WHERE service_id='".$service_id."';");
 
 
-    $str = '<div class="btn-group" data-toggle="buttons">';
+    $str = '<br><div class="btn-group" data-toggle="buttons">';
     
+    $counter = 0;
     while ($row = mysql_fetch_object($sql)) {
+          $counter++;
           $str .= '<label class="btn btn-primary">
                    <input type="radio" name="create_graph[data]" value="'.$row->id.'" id="edit-graph-data-'.$row->id.'"> '.$row->host_name.' - '.$row->service_description.'
                    </label>';
     }
+    if ($counter == 0) $str .= "No host for this service";
     $str .= '</div><br>';
 
     return $str;
@@ -175,13 +180,16 @@ if (file_exists($filepath)) {
     $sql = mysql_query("SELECT * FROM index_data WHERE host_id='".$host_id."';");
 
 
-    $str = '<div class="btn-group" data-toggle="buttons">';
+    $str = '<br><div class="btn-group" data-toggle="buttons">';
     
+    $counter = 0;
     while ($row = mysql_fetch_object($sql)) {
+          $counter++;
           $str .= '<label class="btn btn-primary">
                    <input type="radio" name="create_graph[data]" value="'.$row->id.'" id="edit-graph-data-'.$row->id.'"> '.$row->host_name.' - '.$row->service_description.'
                    </label>';
     }
+    if ($counter == 0) $str .= "This host hasn't any associated service";
     $str .= '</div><br>';
 
     return $str;
@@ -215,7 +223,7 @@ if (file_exists($filepath)) {
             echo getServiceGroups($sg_id);
             echo getServicesByServiceGroup($sg_id);
 	    echo getHostsByServiceGroup($sg_id);
-            echo '<div class="btn-group" data-toggle="buttons"></div>';
+            echo '<br><div class="btn-group" data-toggle="buttons">Please select a service</div>';
         }
     }
 
@@ -225,6 +233,9 @@ if (file_exists($filepath)) {
         $service_id = isset($_GET['service_id']) ? $_GET['service_id'] : NULL;
 	$host_id = isset($_GET['host_id']) ? $_GET['host_id'] : NULL;
         getIndexDataSearch($sg_id, $service_id, $host_id);
+    } else if (isset($_GET['raz']))
+    {
+        getIndexData();
     }
 
 ?>

@@ -42,9 +42,9 @@
 
 	    html2canvas(target, {
 		onrendered: function(canvas) {
-		    var img = canvas.toDataURL("image/png")
+		    var img = canvas.toDataURL("image/jpeg")
 
-		    capture.img = canvas.toDataURL( "image/png" );
+		    capture.img = canvas.toDataURL( "image/jpeg" );
 
 		    w.window.location.href = capture.img;
 		/*
@@ -151,5 +151,23 @@
 				$(forattr).attr("name", "");
 			}
 		})
+	});
+
+	$("body").on("change", ".select-parent select", function(e) {
+		var thisElem = $(this);
+		var thisName = thisElem.attr('name');
+		var path = "./modules/drawMyReport/include/php/getIndexData.php?";
+		var selects = $(".select-parent select");
+
+		$.each(selects, function(key, thisSelect) {
+			var thisValue = $(thisSelect).val();
+			if ($(thisSelect).attr("name") == "sg" && thisValue !== '-')	path += "&sg_id=" + thisValue;
+			if ($(thisSelect).attr("name") == "service" && thisValue !== '-') path += "&service_id=" + thisValue;
+			if ($(thisSelect).attr("name") == "host" && thisValue !== '-') path += "&host_id=" + thisValue;
+		});
+		
+		$.get(path, function(dataResult) {
+			$("#index-data-select").html(dataResult);
+		});
 	});
 });

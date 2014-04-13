@@ -136,7 +136,7 @@ if (isset($_POST["edit_graph"])) {
         </div>
     </div>
     <div id="load-services"></div>
-
+    <br>
     <button class="btn btn-default" type="submit">Save</button>
   </form>
 </div>
