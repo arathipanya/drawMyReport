@@ -7,9 +7,7 @@ function addSelectGraph($graphs_array) {
     $str .= '<option value="'.$graphs_array[$i]->id.'">'.$graphs_array[$i]->name.'</options>';
   }
 
-  $str .= '</select></div>
-	<br>
-        <button class="xs-btn btn-default add-graph-report">Add a graph</button>';
+  $str .= '</select></div><br><button class="xs-btn btn-default add-graph-report">Add a graph</button>';
   return $str;
 }
 

@@ -46,9 +46,9 @@ if ($_POST["create_report"]) {
 <div class="container">
 
 <a href="#" class="create-graph">Create a report</a>
-
+<div>
 <form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
-  <a href="#" class="close-create-graph" title="close form">x</a>
+  <h3>New report <a href="#form-create-graph" class="close-create-graph" title="close form">close</a></h3>
     <div class="input-group">
       <span class="input-group-addon">Name</span>
       <input type="text" class="form-control" name="create_report[name]" placeholder="Name">
@@ -89,7 +89,7 @@ dbClose($db);
 
     <button class="btn btn-primary" type="submit">Save</button>
   </form>
-
+</div>
 
 <hr>
 
@@ -109,6 +109,7 @@ dbClose($db);
     <th>Name</th>
     <th>Title</th>
     <th>Subtitle</th>
+    <th>Action</th>
   </tr>
 <?php
     while ($row = mysql_fetch_object($reports_list)) {
@@ -117,6 +118,7 @@ dbClose($db);
       <td><?php echo $row->name ?></td>
       <td><?php echo $row->title ?></td>
       <td><?php echo $row->subtitle ?></td>
+      <td><a href="./modules/drawMyReport/include/php/edit-report.php?report_id=<?php echo $row->id ?>" title="Edit" class="edit-report"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
   </tr>      
 <?php
     }

@@ -7,7 +7,6 @@
 	function loadGraphs() {
 		var images = $(".graph");
 		$.each(images, function(index, value){
-console.log(value);
 			var thisSrc = $(value).attr("data-path");
 			$(value).attr("src", thisSrc);
 		});
@@ -39,38 +38,44 @@ console.log(value);
 
 	    var capture = {};
 	    var target = $('#target');
+	    var w = window.open("");
+
 	    html2canvas(target, {
 		onrendered: function(canvas) {
 		    var img = canvas.toDataURL("image/png")
 
 		    capture.img = canvas.toDataURL( "image/png" );
+
+		    w.window.location.href = capture.img;
+		/*
 		    capture.data = { 'image' : capture.img };
-                    /* save the image on the server */
-		    $.ajax({
+          		$.ajax({
 			url: "modules/drawMyReport/include/php/ajax.php",
 			data: capture.data,
 			type: 'post',
 			success: function( result ) {
-			    console.log( result );
+				window.location.href = capture.img;
 			}
 		    });
+		*/
 		}
 	    });
 
 	});
 
-	$(".create-graph").click(function(e) {
+	$("body").on("click", ".create-graph", function(e) {
 	    	e.preventDefault();
-	    	
+
 		$(this).hide();
 		$("#form-create-graph").show();
 	});
 
-	$(".close-create-graph").click(function(e) {
-	    	e.preventDefault();
-	    	
+	$("body").on("click", ".close-create-graph", function(e){
+		e.preventDefault();
+
 		$(".create-graph").show();
-		$("#form-create-graph").hide();
+		var target = $(this).attr('href');
+		$(target).hide();
 	});
 
 	$("body").on("click", ".add-graph-report", function(e){
@@ -80,13 +85,30 @@ console.log(value);
 		$("#select-graph-report-model").prepend(model.parent().html());
 	});
 
-	$(".edit-graph").click(function(e){
+	$("body").on("click", ".edit-graph", function(e){
 		e.preventDefault();
 	
 		var path = $(this).attr("href");
 		$.get(path, function(dataResult) {
-			console.log(dataResult);
-			$("#form-create-graph").parent().html(dataResult);
+			if (!$("#form-edit-graph").length) {
+				$("#form-create-graph").parent().append(dataResult);
+			} else {
+				$("#form-edit-graph").parent().html(dataResult);
+			}
 		});
+	});	
+
+	$("body").on("click", ".remove-graph", function(e){
+		e.preventDefault();
+
+		var confirm = window.confirm("Are you sure?");
+
+		if (confirm) {
+			var path = $(this).attr("href");
+			$.get(path, function(dataResult) {console.log(dataResult)});
+			location.reload();
+		} else {
+
+		}
 	});	
 });

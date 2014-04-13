@@ -59,7 +59,7 @@ if ($_POST["create_graph"]) {
 <div class="container">
 
 <a href="#" class="create-graph">Create a graph</a>
-
+<div>
 <form class="form col-lg-6" hidden role="form" id="form-create-graph" method="post" action="">
   <a href="#" class="close-create-graph" title="close form">x</a>
     <div class="input-group">
@@ -126,7 +126,7 @@ if ($_POST["create_graph"]) {
 
     <button class="btn btn-default" type="submit">Save</button>
   </form>
-
+</div>
 
 
 <hr>
@@ -158,8 +158,8 @@ if ($_POST["create_graph"]) {
       <td><?php echo $row->title ?></td>
       <td><?php echo $row->description ?></td>
       <td><?php echo $row->type ?></td>
-      <td><?php echos $row->period ?></td>
-      <td><a href="#" title="Edit" class="edit-graph"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
+      <td><?php echo $row->period ?></td>
+      <td><a href="./modules/drawMyReport/include/php/edit-graph.php?graph_id=<?php echo $row->id ?>" title="Edit" class="edit-graph"><span class="glyphicon glyphicon-pencil"></span></a> <a href="#" title="Remove" class="remove-graph"><span class="glyphicon glyphicon-trash"></span></a></td>
   </tr>      
 <?php
     }

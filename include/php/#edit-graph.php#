@@ -6,7 +6,7 @@ include './graphs-func.php';
 if (file_exists($filepath)) {
   include($filepath);
 
-  $connect = mysql_connect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password']) or die('Impossible de se connecter √† la base de donnees'.mysql_error());
+  $connect = mysql_connect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password']) or die('Impossible de se connecter Å‡ la base de donnees'.mysql_error());
   mysql_select_db($conf_centreon['db']) or die('Impossible de trouver la base de donnees '.mysql_error());
   $sql = mysql_query('SELECT * FROM drawmyreport_graphs WHERE id='.$_GET['graph_id'].';');
   $data = mysql_fetch_object($sql);
@@ -18,7 +18,7 @@ if (file_exists($filepath)) {
       $filepath = '/etc/centreon/centreon.conf.php';
       include($filepath);
 
-      $connect = mysql_connect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password']) or die('Impossible de se connecter √† la base de donnees'.mysql_error());
+      $connect = mysql_connect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password']) or die('Impossible de se connecter Å‡ la base de donnees'.mysql_error());
       mysql_select_db($conf_centreon['dbcstg']) or die('getIndexData : Impossible de trouver la base de donnees '.mysql_error());
       $service_groups_list = mysql_query('SELECT * FROM index_data ORDER BY service_description');
 
