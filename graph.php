@@ -15,7 +15,7 @@
     <script type="text/javascript" src="./modules/drawMyReport/include/js/html2canvas.js"></script>
 
 
-<form class="bs-example bs-example-form" role="form">
+<form class="bs-example bs-example-form" role="form" id="form-email" method="post" action="/include/php/treat_email.php">
     <div class="input-group">
       <span class="input-group-addon">Title</span>
       <input type="text" class="form-control" name="title" placeholder="Title">
