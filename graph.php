@@ -63,4 +63,5 @@
         <input type="radio" name="period" value="year">
       </span>
     </div>
+    <button class="btn btn-default" type="submit">Save</button>
   </form>
