@@ -25,9 +25,11 @@ if ($_POST["create_email"]) {
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
   $error=0;
 
+  /* Entre la ressource en base de donnéees */
   $result = mysql_query("INSERT INTO drawmyreport_emails (name, title, date_first_send, date_last_modification) VALUES('".$_POST["create_email"]["name"]."','".$_POST["create_email"]["title"]."','".$_POST["create_email"]["date_first_send"]."', '".$_POST["create_email"]["date_last_modification"]."');");
   $report_id = mysql_insert_id();
 
+  /* Entre la dépendance email/user en base de données */
   if ($_POST["create_email"]["users"]) {
     $post_graphs_array = $_POST["create_email"]["users"];
     for ($i = 0; $i < count($post_graphs_array); $i++) {
@@ -37,6 +39,7 @@ if ($_POST["create_email"]) {
     }
   }
 
+  /* Entre la dépendance email/report en base de données */
   if ($_POST["create_email"]["reports"]) {
     $post_graphs_array = $_POST["create_email"]["reports"];
     for ($i = 0; $i < count($post_graphs_array); $i++) {
@@ -51,6 +54,7 @@ if ($_POST["create_email"]) {
 }
 
 if (isset($_POST["edit_report"])) {
+  /* Editer un rapport, même procedure que la création */
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
