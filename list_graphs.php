@@ -44,6 +44,7 @@ function getIndexData() {
 
 <?php 
 if (isset($_POST["create_graph"])) {
+  /* Block pour créer un graph */
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
@@ -56,6 +57,7 @@ if (isset($_POST["create_graph"])) {
 }
 
 if (isset($_POST["edit_graph"])) {
+  /* Block pour editer un graph */
   global $conf_centreon;
 
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
