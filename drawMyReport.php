@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Centreon is developped with GPL Licence 2.0 :
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
@@ -66,9 +67,7 @@ if (isset($_GET["report"])) {
   $report_id = 1;
 }
   global $conf_centreon;
-  
   $db = dbConnect($conf_centreon['hostCentreon'], $conf_centreon['user'], $conf_centreon['password'],$conf_centreon['db'], true);
-  
   $reports_list = mysql_query("SELECT * FROM drawmyreport_reports WHERE id = ".$report_id.";");
 
   $thisReport = mysql_fetch_object($reports_list);
@@ -102,7 +101,7 @@ for ($i = 0; $i < count($graphs_array); $i++) {
   <img class="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service_id=<?php echo $graphs_array[$i]->data ?>&tp=<?php echo $tp ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=600"/>
   <br>
 <br>
-  <?
+  <?php
  }
 ?>
 
@@ -117,3 +116,4 @@ for ($i = 0; $i < count($graphs_array); $i++) {
 </div>
   </body>
 </html>
+
