@@ -1,6 +1,6 @@
 INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'DrawMyReport', NULL, NULL, 7, 70, 1, './modules/drawMyReport/index.php', '&action=index&controleur=accueil', '0', '1', '1');
 
-INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Reports', NULL, 7, 710, 10, 2, './modules/drawMyReport/index.php', '&action=index&controleur=accueil', '0', '1', '1');
+INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Reports', NULL, 7, 710, 10, 2, './modules/drawMyReport/index.php', '&action=liste&controleur=report', '0', '1', '1');
 
 INSERT INTO `topology` (`topology_id`, `topology_name`, `topology_icone`, `topology_parent`, `topology_page`, `topology_order`, `topology_group`, `topology_url`, `topology_url_opt`, `topology_popup`, `topology_modules`, `topology_show`) VALUES ('', 'Graphs', NULL, 7, 720, 20, 2, './modules/drawMyReport/list_graphs.php', NULL, '0', '1', '1');
 

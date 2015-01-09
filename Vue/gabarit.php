@@ -1,23 +1,29 @@
-<!doctype html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <base href="<?= $racineWeb ?>" >
-        <link rel="stylesheet" href="Contenu/style.css" />
-        <title><?= $titre ?></title>
-    </head>
-    <body>
-        <div id="global">
-            <header>
-                <a href=""><h1 id="titreBlog">Mon Blog</h1></a>
-                <p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
-            </header>
-            <div id="contenu">
-                <?= $contenu ?>
-            </div> <!-- #contenu -->
-            <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.
-            </footer>
-        </div> <!-- #global -->
-    </body>
-</html>
+    <title><?= $titre ?></title>
+<!-- Bootstrap -->
+    <link href="./modules/drawMyReport/Contenu/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./modules/drawMyReport/Contenu/css/drawmyreport.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
+
+    <script src="./modules/drawMyReport/Contenu/js/bootstrap.min.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/jsapi.js"></script>
+
+    <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/base.js"></script>
+    <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/html2canvas.js"></script>
+
+
+
+<div id="container">
+   <?= $contenu ?>
+</div> <!-- #contenu -->
+
+<footer id="piedBlog">
+   All rights reserved DrawMyReport Team
+</footer>
+
+

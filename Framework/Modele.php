@@ -1,5 +1,5 @@
 <?php
-echo " file: Framework/Modele.php";
+
 require_once './modules/drawMyReport/Framework/Configuration.php';
 
 /**

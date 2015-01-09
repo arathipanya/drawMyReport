@@ -30,7 +30,6 @@ class Routeur {
             $controleur->executerAction($action);
         }
         catch (Exception $e) {
-	  echo $e;
             $this->gererErreur($e);
         }
     }

@@ -1,25 +1,25 @@
-file: Controleur/ControleurAccueil.php
 <?php
 
 require_once './modules/drawMyReport/Framework/Controleur.php';
 require_once './modules/drawMyReport/Modele/Report.php';
+//require_once './modules/drawMyReport/Modele/Graph.php';
 
 class ControleurAccueil extends Controleur {
 
-    //private $billet;
     private $report;
+    //private $graph;
 
     public function __construct() {
-        //$this->billet = new Billet();
     	$this->report = new Report();
+	//$this->graph = new Graph();
     }
 
-    // Affiche la liste de tous les billets du blog
+    // Affiche la liste de tous les rapports + precharge les graphs
     public function index() {
-        //$billets = $this->billet->getBillets();
-        //$this->genererVue(array('billets' => $billets));
         $reports = $this->report->getReports();
-        $this->genererVue(array('reports' => $reports));
+	//	$graphs = $this->graph->getGraphs();
+        //$this->genererVue(array('reports' => $reports, 'graphs' => $graphs));
+	$this->genererVue(array('reports' => $reports));
     }
 
 }
