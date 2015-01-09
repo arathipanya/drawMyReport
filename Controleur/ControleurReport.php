@@ -22,15 +22,37 @@ class ControleurReport extends Controleur {
     public function liste() {
         $reports = $this->report->getReports();
 	$graphs = $this->graph->getGraphs();
-	$this->genererVue(array('reports' => $reports, 'graphs' => $graphs));
+	$this->setAction("liste");
+	$this->genererVue(true, array('reports' => $reports, 'graphs' => $graphs));
+    }
+
+    public function get_form() {
+      $id = NULL;
+	//TODO: edit from id
+      $report = NULL;
+      if ($id) {
+	$report = $this->report->getReport();
+      }
+      $graphs = $this->graph->getGraphs();
+      $this->setAction("create");
+      $this->genererVue(true, array('report' => $report, 'graphs' => $graphs));
     }
 
     public function create() {
-      //      var_dump($_POST);
-      foreach ($_POST as $key => $value) {
-	$_POST[$key] = htmlentities($value);
-      }
+      $name = $this->requete->getParametre("name");
+      $title = $this->requete->getParametre("title");
+      $subtitle = $this->requete->getParametre("subtitle");
+      $graphs = $this->requete->getParametre("graphs");
+
+      $this->report->create($name, $title, $subtitle, $graphs);
+      self::liste();
     }
 
+    public function delete() {
+      $id = $this->requete->getParametre("id");
+
+      $this->report->delete($id);
+      self::liste();
+    }
 }
 

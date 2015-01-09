@@ -19,7 +19,7 @@ class ControleurAccueil extends Controleur {
         $reports = $this->report->getReports();
 	//	$graphs = $this->graph->getGraphs();
         //$this->genererVue(array('reports' => $reports, 'graphs' => $graphs));
-	$this->genererVue(array('reports' => $reports));
+	$this->genererVue(true, array('reports' => $reports));
     }
 
 }

@@ -28,6 +28,10 @@ abstract class Controleur {
         $this->requete = $requete;
     }
 
+    public function setAction($action) {
+      $this->action = $action;
+    }
+
     /**
      * Exécute l'action à réaliser.
      * Appelle la méthode portant le même nom que l'action sur l'objet Controleur courant
@@ -57,15 +61,13 @@ abstract class Controleur {
      * 
      * @param array $donneesVue Données nécessaires pour la génération de la vue
      */
-    protected function genererVue($donneesVue = array())
+    protected function genererVue($layout, $donneesVue = array())
     {
         // Détermination du nom du fichier vue à partir du nom du contrôleur actuel
         $classeControleur = get_class($this);
         $controleur = str_replace("Controleur", "", $classeControleur);
-        
         // Instanciation et génération de la vueF
         $vue = new Vue($this->action, $controleur);
-        $vue->generer($donneesVue);
+        $vue->generer($layout, $donneesVue);
     }
-
 }

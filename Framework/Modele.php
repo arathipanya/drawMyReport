@@ -34,6 +34,11 @@ abstract class Modele {
         return $resultat;
     }
 
+    protected function lastInsertId() {
+        return self::getBdd()->lastInsertId();
+    }
+
+
     /**
      * Renvoie un objet de connexion à la BDD en initialisant la connexion au besoin
      * 

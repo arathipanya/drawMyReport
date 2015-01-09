@@ -27,7 +27,7 @@ class Requete {
      * @return bool Vrai si le paramètre existe et sa valeur n'est pas vide 
      */
     public function existeParametre($nom) {
-        return (isset($this->parametres[$nom]) && $this->parametres[$nom] != "");
+        return (isset($this->parametres[$nom]));
     }
 
     /**
@@ -39,7 +39,7 @@ class Requete {
      */
     public function getParametre($nom) {
         if ($this->existeParametre($nom)) {
-            return $this->parametres[$nom];
+            return htmlentities($this->parametres[$nom]);
         }
         else {
             throw new Exception("Paramètre '$nom' absent de la requête");
