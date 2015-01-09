@@ -1,6 +1,6 @@
 <?php
-
-require_once 'Configuration.php';
+echo " file: Framework/Modele.php";
+require_once './modules/drawMyReport/Framework/Configuration.php';
 
 /**
  * Classe abstraite Modèle.
@@ -40,14 +40,21 @@ abstract class Modele {
      * @return PDO Objet PDO de connexion à la BDD
      */
     private static function getBdd() {
+        global $conf_centreon;
+
         if (self::$bdd === null) {
             // Récupération des paramètres de configuration BD
+	  $dsn = "mysql:host=".$conf_centreon["hostCentreon"].";dbname=".$conf_centreon["db"].";charset=utf8";
+	  $login = $conf_centreon["user"];
+	  $mdp = $conf_centreon["password"];
+
+	  /*
             $dsn = Configuration::get("dsn");
             $login = Configuration::get("login");
             $mdp = Configuration::get("mdp");
+	  */
             // Création de la connexion
-            self::$bdd = new PDO($dsn, $login, $mdp, 
-                    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            self::$bdd = new PDO($dsn, $login, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
         return self::$bdd;
     }

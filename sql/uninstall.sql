@@ -1,14 +1,11 @@
 -- 19/12/2008 - Write here your uninstallation queries.
 
 DELETE FROM `topology` WHERE `topology_page` = '7';
-DELETE FROM `topology` WHERE `topology_page` = '701';
-DELETE FROM `topology` WHERE `topology_page` = '702';
-DELETE FROM `topology` WHERE `topology_page` = '703';
-DELETE FROM `topology` WHERE `topology_page` = '704';
-DELETE FROM `topology` WHERE `topology_page` = '70103';
-DELETE FROM `topology` WHERE `topology_page` = '70104';
-DELETE FROM `topology` WHERE `topology_page` = '70105';
-DELETE FROM `topology` WHERE `topology_page` = '70106';
+DELETE FROM `topology` WHERE `topology_page` = '710';
+DELETE FROM `topology` WHERE `topology_page` = '720';
+DELETE FROM `topology` WHERE `topology_page` = '730';
+DELETE FROM `topology` WHERE `topology_page` = '740';
+DELETE FROM `css_color_menu` WHERE `menu_nb` = '7';
 
 DROP TABLE IF EXISTS `drawmyreport_graphs`;
 DROP TABLE IF EXISTS `drawmyreport_emails`;

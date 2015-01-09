@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Requete.php';
-require_once 'Vue.php';
-
+require_once $RACINE_WEB.'/Framework/Requete.php';
+require_once $RACINE_WEB.'/Framework/Vue.php';
+echo "file: Framework/Controleur.php";
 /**
  * Classe abstraite Controleur
  * Fournit des services communs aux classes Controleur dérivées

@@ -1,6 +1,6 @@
  <?php
 
-require_once 'Framework/Modele.php';
+require_once './modules/drawMyReport/Framework/Modele.php';
 
 class Report extends Modele {
 

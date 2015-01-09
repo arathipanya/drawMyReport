@@ -1,9 +1,11 @@
 <?php $this->titre = "Mon Blog"; ?>
-
+file: Vues/Accueil/index.php
 <?php foreach ($reports as $report):
     ?>
-    coucou
-    <?php /*
+
+<?php var_dump($report);?>
+
+    <?php/*
     <article>
         <header>
             <a href="<?= "billet/index/" . $this->nettoyer($billet['id']) ?>">

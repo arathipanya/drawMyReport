@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Classe de gestion des paramètres de configuration
- * 
- * Inspirée du SimpleFramework de Frédéric Guillot
- * (https://github.com/fguillot/simpleFramework)
- *
- * @version 1.0
- * @author Baptiste Pesquet
- */
 class Configuration {
 
     /** Tableau des paramètres de configuration */
@@ -22,6 +13,9 @@ class Configuration {
      * @return string Valeur du paramètre
      */
     public static function get($nom, $valeurParDefaut = null) {
+        self::getParametres();
+        return self::$parametres[$nom];
+/*
         if (isset(self::getParametres()[$nom])) {
             $valeur = self::getParametres()[$nom];
         }
@@ -29,6 +23,7 @@ class Configuration {
             $valeur = $valeurParDefaut;
         }
         return $valeur;
+*/
     }
 
     /**
@@ -40,9 +35,9 @@ class Configuration {
      */
     private static function getParametres() {
         if (self::$parametres == null) {
-            $cheminFichier = "Config/dev.ini";
+            $cheminFichier = "./modules/drawMyReport/Config/dev.ini";
             if (!file_exists($cheminFichier)) {
-                $cheminFichier = "Config/prod.ini";
+                $cheminFichier = "./modules/drawMyReport/Config/prod.ini";
             }
             if (!file_exists($cheminFichier)) {
                 throw new Exception("Aucun fichier de configuration trouvé");

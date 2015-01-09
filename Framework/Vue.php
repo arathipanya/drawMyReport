@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Configuration.php';
-
+require_once $RACINE_WEB.'/Framework/Configuration.php';
+echo "file: Framework/Vue.php";
 /**
  * Classe modélisant une vue
  *
@@ -25,7 +25,7 @@ class Vue {
     public function __construct($action, $controleur = "") {
         // Détermination du nom du fichier vue à partir de l'action et du constructeur
         // La convention de nommage des fichiers vues est : Vue/<$controleur>/<$action>.php
-        $fichier = "Vue/";
+        $fichier = "./modules/drawMyReport/Vue/";
         if ($controleur != "") {
             $fichier = $fichier . $controleur . "/";
         }
@@ -45,7 +45,7 @@ class Vue {
         // Nécessaire pour les URI de type controleur/action/id
         $racineWeb = Configuration::get("racineWeb", "/");
         // Génération du gabarit commun utilisant la partie spécifique
-        $vue = $this->genererFichier('Vue/gabarit.php',
+        $vue = $this->genererFichier('./modules/drawMyReport/Vue/gabarit.php',
                 array('titre' => $this->titre, 'contenu' => $contenu,
                     'racineWeb' => $racineWeb));
         // Renvoi de la vue générée au navigateur

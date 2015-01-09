@@ -1,7 +1,8 @@
+file: Controleur/ControleurAccueil.php
 <?php
 
-require_once 'Framework/Controleur.php';
-require_once 'Modele/Billet.php';
+require_once './modules/drawMyReport/Framework/Controleur.php';
+require_once './modules/drawMyReport/Modele/Report.php';
 
 class ControleurAccueil extends Controleur {
 

@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Controleur.php';
-require_once 'Requete.php';
-require_once 'Vue.php';
+require_once $RACINE_WEB.'/Framework/Controleur.php';
+require_once $RACINE_WEB.'/Framework/Requete.php';
+require_once $RACINE_WEB.'/Framework/Vue.php';
 
 /*
  * Classe de routage des requêtes entrantes.
@@ -14,7 +14,6 @@ require_once 'Vue.php';
  * @author Baptiste Pesquet
  */
 class Routeur {
-
     /**
      * Méthode principale appelée par le contrôleur frontal
      * Examine la requête et exécute l'action appropriée
@@ -29,8 +28,10 @@ class Routeur {
             $action = $this->creerAction($requete);
 
             $controleur->executerAction($action);
+	    echo " ---->ERE<----- ";
         }
         catch (Exception $e) {
+	  echo $e;
             $this->gererErreur($e);
         }
     }
@@ -55,7 +56,7 @@ class Routeur {
         // Création du nom du fichier du contrôleur
         // La convention de nommage des fichiers controleurs est : Controleur/Controleur<$controleur>.php
         $classeControleur = "Controleur" . $controleur;
-        $fichierControleur = "Controleur/" . $classeControleur . ".php";
+        $fichierControleur = "./modules/drawMyReport/Controleur/" . $classeControleur . ".php";
         if (file_exists($fichierControleur)) {
             // Instanciation du contrôleur adapté à la requête
             require($fichierControleur);
