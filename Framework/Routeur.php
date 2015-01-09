@@ -28,7 +28,6 @@ class Routeur {
             $action = $this->creerAction($requete);
 
             $controleur->executerAction($action);
-	    echo " ---->ERE<----- ";
         }
         catch (Exception $e) {
 	  echo $e;

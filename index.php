@@ -8,6 +8,6 @@ require './modules/drawMyReport/Framework/Routeur.php';
 
 $routeur = new Routeur();
 $routeur->routerRequete();
-echo "---OK---";
+
 
 ?>
