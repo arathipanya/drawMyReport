@@ -2,14 +2,6 @@
 
 require_once './modules/drawMyReport/Framework/Configuration.php';
 
-/**
- * Classe abstraite Modèle.
- * Centralise les services d'accès à une base de données.
- * Utilise l'API PDO de PHP
- *
- * @version 1.0
- * @author Baptiste Pesquet
- */
 abstract class Modele {
 
     /** Objet PDO d'accès à la BD 
@@ -47,7 +39,7 @@ abstract class Modele {
     private static function getBdd() {
         global $conf_centreon;
 
-        if (self::$bdd === null) {
+        if (true || self::$bdd === null) {
             // Récupération des paramètres de configuration BD
 	  $dsn = "mysql:host=".$conf_centreon["hostCentreon"].";dbname=".$conf_centreon["db"].";charset=utf8";
 	  $login = $conf_centreon["user"];

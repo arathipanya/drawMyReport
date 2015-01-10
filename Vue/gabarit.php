@@ -14,6 +14,7 @@
     <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/jsapi.js"></script>
 
     <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/base.js"></script>
+    <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/export-image.js"></script>
     <script type="text/javascript" src="./modules/drawMyReport/Contenu/js/html2canvas.js"></script>
 
 
@@ -22,7 +23,7 @@
    <?= $contenu ?>
 </div> <!-- #contenu -->
 
-<footer id="piedBlog">
+<footer class="container">
    All rights reserved DrawMyReport Team
 </footer>
 
