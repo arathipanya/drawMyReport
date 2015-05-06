@@ -39,7 +39,7 @@ class Requete {
      */
     public function getParametre($nom) {
         if ($this->existeParametre($nom)) {
-            return htmlentities($this->parametres[$nom]);
+	  return (!is_array($this->parametres[$nom])) ? htmlentities($this->parametres[$nom]) : $this->parametres[$nom];
         }
         else {
             throw new Exception("Paramètre '$nom' absent de la requête");

@@ -34,7 +34,6 @@ $p = self::nettoyer($_GET['p']);
     <td><?php echo $graph["type"]; ?></td>
     <td><?php echo $graph["period"]; ?></td>
     <td>
-        <a href="main.php?p=<?php echo $p; ?>"><?php echo $p; ?></a><br>
         <a href="main.php?p=<?php echo $p; ?>&action=delete&controleur=graph&id=<?php echo $graph['id']; ?>">Delete</a>
     </td>
 </tr>

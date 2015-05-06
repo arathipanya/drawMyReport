@@ -16,18 +16,20 @@ abstract class Modele {
      * @return PDOStatement Résultats de la requête
      */
     protected function executerRequete($sql, $params = null) {
+        $insertedId = NULL;
         if ($params == null) {
-            $resultat = self::getBdd()->query($sql);   // exécution directe
+            $resultat = self::getBdd()->prepare($sql);   // exécution directe
+	    $resultat->execute();
         }
         else {
             $resultat = self::getBdd()->prepare($sql); // requête préparée
             $resultat->execute($params);
         }
-        return $resultat;
+	return ($insertedId) ? $insertedId : $resultat;
     }
 
     protected function lastInsertId() {
-        return self::getBdd()->lastInsertId();
+      return self::getBdd()->lastInsertId();
     }
 
 

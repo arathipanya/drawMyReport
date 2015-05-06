@@ -3,7 +3,6 @@
     <link href="./modules/drawMyReport/Contenu/css/bootstrap.min.css" rel="stylesheet">
     <link href="./modules/drawMyReport/Contenu/css/drawmyreport.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
-
     <script src="./modules/drawMyReport/Contenu/js/bootstrap.min.js"></script>
 
     <!--[if lt IE 9]>
@@ -20,7 +19,7 @@
 
 
 <div id="container">
-   <?= $contenu ?>
+   <?php echo $contenu ?>
 </div> <!-- #contenu -->
 
 <footer class="container">

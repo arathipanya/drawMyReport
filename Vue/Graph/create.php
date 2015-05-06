@@ -45,7 +45,7 @@
     </div>
 
     <div class="input-group">
-        <span class="input-group-addon">Service groups</span>
+        <!--span class="input-group-addon">Service groups</span>
         <div class="form-control col-md-3" id="">
             <div class="select-parent">
                 <Select type="text" class="form-control relation-select" data-query="?p=<?php echo $p; ?>&action=getServicesByServiceGroup&controleur=graph&min=1" name="">
@@ -64,7 +64,7 @@
         <span class="input-group-addon">Host groups</span>
         <div class="form-control col-md-3" id="">
             <div class="select-parent">
-                <select type="text" class="form-control relation-select" data-query="?p=<?php echo $p; ?>&action=getHostsByHostGroup&controleur=graph&min=1" name="">
+                <Select type="text" class="form-control relation-select" data-query="?p=<?php echo $p; ?>&action=getHostsByHostGroup&controleur=graph&min=1" name="">
                     <option value="">-</option>
    <?php foreach ($hostgroups as $hg): ?>
                     <option value="<?php echo $hg['id']; ?>">
@@ -75,7 +75,22 @@
    <?php endforeach; ?>
                 </select>
             </div>
+        </div-->
+
+        <span class="input-group-addon">Host/service</span>
+        <div class="form-control col-md-3" id="">
+            <div class="select-parent">
+                <Select type="text" class="form-control" name="data">
+                    <option value="">-</option>
+   <?php foreach ($dataIndex as $data): ?>
+                    <option value="<?php echo $data['id']; ?>">
+   <?php echo $data["host_name"]." - ".$data["service_alias"]; ?>
+		    </option>
+   <?php endforeach; ?>
+                </select>
+            </div>
         </div>
+
     </div>
 
     <div id="targetHTML"></div>

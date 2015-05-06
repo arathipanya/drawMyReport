@@ -54,5 +54,14 @@ class ControleurReport extends Controleur {
       $this->report->delete($id);
       self::liste();
     }
+
+    public function show() {
+      $id = $this->requete->getParametre("id");
+
+      $report = $this->report->getReport($id);
+
+      $this->setAction("show");
+      $this->genererVue(true, array('report' => $report));
+    }
 }
 

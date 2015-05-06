@@ -30,17 +30,21 @@ class ControleurGraph extends Controleur {
       }
       $hg = $this->graph->getHostGroups();
       $sg = $this->graph->getServiceGroups();
+      $di = $this->graph->getDataIndex();
+      //$di = null;
       $this->setAction("create");
-      $this->genererVue(true, array('graph' => $graph, 'servicegroups' => $sg, 'hostgroups' => $hg));
+      $this->genererVue(true, array('graph' => $graph, 'servicegroups' => $sg, 'hostgroups' => $hg, 'dataIndex' => $di));
     }
 
     public function create() {
       $name = $this->requete->getParametre("name");
       $title = $this->requete->getParametre("title");
-      $subtitle = $this->requete->getParametre("subtitle");
-      $graphs = $this->requete->getParametre("graphs");
+      $description = $this->requete->getParametre("description");
+      $type = $this->requete->getParametre("type");
+      $period = $this->requete->getParametre("period");
+      $data = $this->requete->getParametre("data");
 
-      $this->graph->create($name, $title, $subtitle, $graphs);
+      $this->graph->create($name, $title, $description, $type, $period, $data);
       self::liste();
     }
 
@@ -64,5 +68,6 @@ class ControleurGraph extends Controleur {
       $this->setAction("partial-selector");
       $this->genererVue(false, array('topics' => $hosts, 'nextAction' => "create", 'title' => "Hosts"));
     }
+
 }
 

@@ -30,7 +30,7 @@ $p = self::nettoyer($_GET['p']);
     <td><?php echo $report["title"]; ?></td>
     <td><?php echo $report["subtitle"]; ?></td> 
     <td>
-    <a href="main.php?p=<?php echo $p; ?>"><?php echo $p; ?></a><br>
+    <a href="main.php?p=<?php echo $p; ?>&action=show&controleur=report&id=<?php echo $report['id']; ?>">Show</a><br>
         <a href="main.php?p=<?php echo $p; ?>&action=delete&controleur=report&id=<?php echo $report['id']; ?>">Delete</a>
     </td>
 </tr>

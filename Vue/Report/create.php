@@ -16,21 +16,30 @@
     </div>
     <br>
 
-    <div class="input-group" id="select-graphs-list-report">
+    <!--div class="input-group" id="select-graphs-list-report"-->
+    <div class="input-group">
         <span class="input-group-addon">Graphs</span>
+        <!--div class="form-control" id="select-graph-report-model"-->
         <div class="form-control" id="select-graph-report-model">
 
-<div class="select-parent">
+      <span class="input-group-addon">
+      <?php foreach($graphs as $graph): ?>
+        <input type="checkbox" name="graphs[]" value="<?php echo self::nettoyer($graph['id']); ?>">
+        <?php echo self::nettoyer($graph['name']); ?>
+      <?php endforeach; ?>
+      </span>
+      
+<!--div class="select-parent">
     <select type="text" class="form-control" name="graphs[]" placeholder="Select a graph">
           <option value="-">-</option>
 
 <?php foreach($graphs as $graph): ?>
-          <option value="<?php echo self::nettoyer($graph["id"]); ?>"><?php echo self::nettoyer($graph['name']); ?></options>
+          <option value="<?php echo self::nettoyer($graph['id']); ?>"><?php echo self::nettoyer($graph['name']); ?></options>
 <?php endforeach; ?>
     </select>
 </div>
 <br>
-<button class="btn btn-xs btn-primary add-graph-report" target="#select-graph-report-model">Add a graph</button>
+<button class="btn btn-xs btn-primary add-graph-report" target="#select-graph-report-model">Add a graph</button-->
 
         </div>
     </div>
