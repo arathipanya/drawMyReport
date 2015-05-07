@@ -1,27 +1,14 @@
     $(document).ready(function(){
-	function loadGraph() {
-		var image = $("#graph");
-		var thisSrc = image.attr("data-path");
-		image.attr("src", thisSrc);
-	}
-	function loadGraphs() {
-		var images = $(".graph");
-		$.each(images, function(index, value){
-			var thisSrc = $(value).attr("data-path");
-			$(value).attr("src", thisSrc);
-		});
-	}
-        loadGraphs();
- 
 	function cleanHTML() {
 	    var divToClean = $('.untarget');
 	    
 	    for (var i = 0; i < divToClean.length; i++) {
-		divToClean.html("");
+		divToClean.hide();
 	    }
 	}
 
 	function convertCharts(canvases, charts) {
+	    $(".canvases").show();
 	    var canvases = $(".canvases");
 	    var charts = $('svg');
 	    
@@ -29,12 +16,12 @@
 		var chart = $('svg:eq(' + i + ')');
 		canvg(canvases[i], chart.parent().html());
 	    }
-	    $(".untarget-after").html("");
+	    $(".untarget-after").hide();
 	}
 
 	$('#cmd').click(function () {
 	    cleanHTML();
-	    //convertCharts();
+	    convertCharts();
 
 	    var capture = {};
 	    var target = $('#target');
@@ -46,6 +33,10 @@
 		    //capture.img = canvas.toDataURL( "image/jpeg" );
 
 		    w.window.location.href = img;
+
+		    $('.untarget').show();
+		    $(".untarget-after").show();
+		    $(".canvases").hide();
 		/*
 		    capture.data = { 'image' : capture.img };
           		$.ajax({

@@ -28,12 +28,12 @@ class ControleurGraph extends Controleur {
       if ($id) {
 	$graph = $this->graph->getGraph();
       }
-      $hg = $this->graph->getHostGroups();
-      $sg = $this->graph->getServiceGroups();
+      //$hg = $this->graph->getHostGroups();
+      //$sg = $this->graph->getServiceGroups();
       $di = $this->graph->getDataIndex();
-      //$di = null;
+
       $this->setAction("create");
-      $this->genererVue(true, array('graph' => $graph, 'servicegroups' => $sg, 'hostgroups' => $hg, 'dataIndex' => $di));
+      $this->genererVue(true, array('graph' => $graph, 'servicegroups' => null, 'hostgroups' => null, 'dataIndex' => $di));
     }
 
     public function create() {

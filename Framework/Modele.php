@@ -16,45 +16,43 @@ abstract class Modele {
      * @return PDOStatement Résultats de la requête
      */
     protected function executerRequete($sql, $params = null) {
-        $insertedId = NULL;
         if ($params == null) {
             $resultat = self::getBdd()->prepare($sql);   // exécution directe
 	    $resultat->execute();
         }
         else {
-            $resultat = self::getBdd()->prepare($sql); // requête préparée
-            $resultat->execute($params);
+            $resultat = self::getBdd($params)->prepare($sql); // requête préparée
+            $resultat->execute();
         }
-	return ($insertedId) ? $insertedId : $resultat;
+	return $resultat;
     }
 
     protected function lastInsertId() {
       return self::getBdd()->lastInsertId();
     }
 
-
     /**
      * Renvoie un objet de connexion à la BDD en initialisant la connexion au besoin
      * 
      * @return PDO Objet PDO de connexion à la BDD
      */
-    private static function getBdd() {
+    private static function getBdd($otherBdd = null) {
         global $conf_centreon;
 
-        if (true || self::$bdd === null) {
+        //if (!$otherBdd || self::$bdd === null) {
+	if ($otherBdd == null) {
             // Récupération des paramètres de configuration BD
 	  $dsn = "mysql:host=".$conf_centreon["hostCentreon"].";dbname=".$conf_centreon["db"].";charset=utf8";
 	  $login = $conf_centreon["user"];
 	  $mdp = $conf_centreon["password"];
-
-	  /*
-            $dsn = Configuration::get("dsn");
-            $login = Configuration::get("login");
-            $mdp = Configuration::get("mdp");
-	  */
             // Création de la connexion
-            self::$bdd = new PDO($dsn, $login, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        }
+	  self::$bdd = new PDO($dsn, $login, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        } else {
+	  $dsn = "mysql:host=".$conf_centreon["hostCentstorage"].";dbname=".$conf_centreon["dbcstg"].";charset=utf8";
+	  $login = $conf_centreon["user"];
+	  $mdp = $conf_centreon["password"];
+	  self::$bdd = new PDO($dsn, $login, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+	}
         return self::$bdd;
     }
 

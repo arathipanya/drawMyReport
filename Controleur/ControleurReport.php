@@ -59,9 +59,10 @@ class ControleurReport extends Controleur {
       $id = $this->requete->getParametre("id");
 
       $report = $this->report->getReport($id);
+      $graphs = $this->report->getGraphs($id);
 
       $this->setAction("show");
-      $this->genererVue(true, array('report' => $report));
+      $this->genererVue(true, array('report' => $report, 'graphs' => $graphs));
     }
 }
 

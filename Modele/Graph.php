@@ -47,9 +47,10 @@ class Graph extends Modele {
     }
 
     public function getDataIndex() {
-      $sql = "SELECT hsr_id AS id, host_host_id AS host_id, host_name, service_service_id AS service_id, service_alias FROM host_service_relation INNER JOIN host ON host_id = host_host_id INNER JOIN service ON service_service_id = service_id;";
-
-      $hosts = $this->executerRequete($sql);
+      //$sql = "SELECT hsr_id AS id, host_host_id AS host_id, host_name, service_service_id AS service_id, service_alias FROM host_service_relation INNER JOIN host ON host_id = host_host_id INNER JOIN service ON service_service_id = service_id;";
+      $sql = "select * from index_data;";
+      $hosts = $this->executerRequete($sql, "centreon_storage");
+      //            var_dump($hosts->rowCount());
       return $hosts;
     }
 

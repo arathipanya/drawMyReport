@@ -84,7 +84,7 @@
                     <option value="">-</option>
    <?php foreach ($dataIndex as $data): ?>
                     <option value="<?php echo $data['id']; ?>">
-   <?php echo $data["host_name"]." - ".$data["service_alias"]; ?>
+   <?php echo $data["host_name"]." - ".$data["service_description"]; ?>
 		    </option>
    <?php endforeach; ?>
                 </select>
