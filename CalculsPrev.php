@@ -32,5 +32,13 @@ static class CalculsPrev
 		}
 		return $ordo_b;	
 	}
+	
+	public static function calc_futur_ordo_y($coef_dir_a, $jour_x, $ordo_b)
+	{
+		var $futur_ordo_y = 0;
+		
+		$futur_ordo_y = $coef_dir_a * $jour_x + $ordo_b;
+		return $futur_ordo_y;
+	}
 }
 
