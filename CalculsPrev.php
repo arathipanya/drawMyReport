@@ -1,8 +1,25 @@
-
+/*
+** Cette classe statique 'CalculsPrev' permet d'utiliser des fonctions de calculs
+** pour obtenir des coordonnées de points d'une courbe prévisionnelle
+** en fonction des données réelles relevées pour les graphiques de repoting.
+*/
 
 static class CalculsPrev
 {
-
+	/*
+	** Calcul du coefficient directeur, la pente de la courbe prévisionnelle.
+	** 
+	** Les paramètres $pt1 et $pt2 sont des tableaux à deux cases.
+	** La case 0 est pour l'abcisse et la case 1 pour l'ordonnée d'un point.
+	**
+	** $pt1 représente un point de courbe dans l'historique des données comme
+	** 25 jours précédents le rapport.
+	** $pt2 représente le point connu du dernier jour des données relevées du monitoring
+	** pour tracer une courbe pour les rapports.
+	**
+	** Grâce à ce coefficient directeur, il est possible de déterminer les futures valeurs
+	** ou la tendance des métriques relevés auparavant.
+	*/
 	public static function coef_director($pt1, $pt2)
 	{
 		var $coef_dir;
@@ -18,6 +35,15 @@ static class CalculsPrev
 		return $coef_dir;
 	}
 
+	/*
+	** Calcul de l'offset de l'ordonnée 'b' pour la courbe prévisionnelle.
+	** Ce calcul est facultatif.
+	**
+	** On peut à la place utiliser l'ordonnée du dernier point des données
+	** pour tracer la courbe des résultats d'un reporting.
+	** Les paramètres $pt1 et $pt2 sont des tableaux à deux cases.
+	** La case 0 est pour l'abcisse et la case 1 pour l'ordonnée d'un point. 
+	*/
 	public static function calc_ordo_b($pt1, $pt2)
 	{
 		var $ordo_b;
@@ -33,6 +59,10 @@ static class CalculsPrev
 		return $ordo_b;	
 	}
 	
+	/*
+	** Calcul de l'ordonnée futur liée à un jour qui correspond à l'axe des abcisses.
+	** Le calcul de la pente ou coefficient directeur doit être obligatoirement calculé auparavant.
+	*/
 	public static function calc_futur_ordo_y($coef_dir_a, $jour_x, $ordo_b)
 	{
 		var $futur_ordo_y = 0;
