@@ -84,7 +84,7 @@ static class CalculsPrev
 		$array_ordo_y_one_year = array();
 		
 		$array_ordo_y_one_year = init_array_ordo_y_one_year($array_ordo_y_one_year);
-		for ($i = 0; $i < 364; ++$i)
+		for ($i = 0; $i < 365; ++$i)
 		{
 			$array_ordo_y_one_year[$i] = calc_futur_ordo_y($coef_dir_a, $jour_x, $ordo_b);
 		}
@@ -99,7 +99,7 @@ static class CalculsPrev
 	{
 		integer $i;
 		
-		for ($i = 0; $i < 364; ++$i)
+		for ($i = 0; $i < 365; ++$i)
 		{
 			$array_ordo_y_one_year[$i] = 0;			
 		}		
