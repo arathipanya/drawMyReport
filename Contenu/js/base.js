@@ -28,9 +28,9 @@ $(document).ready(function(){
 	google.setOnLoadCallback(drawChart);
 	function drawChart() {
 	    //linechart
-	    var linecharts = $('.line-chart');
+	    var charts = $('.chart');
 
-	    $(linecharts).each(function (current) {
+	    $(charts).each(function (curr) {
 		    var thisc = $(this);
 		    var di = $(this).attr("data-index");
 		    var sid = $(this).attr("data-sid");
@@ -54,6 +54,7 @@ $(document).ready(function(){
 			    var data = null;
 			    data = new google.visualization.DataTable();
 			    var r = result.split('\n');
+			    var type = "memory";
 			    
 			    for (var i = 0; i < r.length; i++) {
 				r[i] = r[i].split(';');
@@ -64,6 +65,9 @@ $(document).ready(function(){
 			    data.addColumn('datetime', 'Date'); 
 			    for (var i = 2; i < r[0].length; i++) {
 				data.addColumn('number', r[0][i]);
+				if (r[0][i] !== "used" && r[0][i] !== "size") {
+				    type = "fequency";
+				}
 			    }
 			    
 			    var temp_data = []
@@ -85,8 +89,21 @@ $(document).ready(function(){
 			    }
 			    data.addRows(temp_data);
 
+			    $.post('./modules/drawMyReport/Contenu/php/dataChart.php', {type: type, data: temp_data}, function(analyses) {
+				    analyses = analyses.split(';');
+				    var _target = thisc.siblings('.prevision')[0];
+
+				    if (analyses[0] !== '-1') $(_target).find('.beginning').html(analyses[0]);
+				    if (analyses[1] !== '-1') $(_target).find('.seven').html(analyses[1]);
+				    if (analyses[2] !== '-1') $(_target).find('.month').html(analyses[2]);
+				});
+
 			    var options = {};
 			    var chart = new google.visualization.LineChart($(thisc)[0]);
+
+			    if ($(thisc).hasClass('area-chart')) {
+				var chart = new google.visualization.AreaChart($(thisc)[0]);
+			    }
 			    
 			    chart.draw(data, options); 
 			});

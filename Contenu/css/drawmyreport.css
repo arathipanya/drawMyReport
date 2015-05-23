@@ -108,3 +108,21 @@ border-radius: 4px;
 footer {
     margin-top: 100px;
 }
+
+#target {
+  background-color: #fff;
+}
+
+#target .jumbotron {
+  text-align: center;
+  background-color: #fff;
+}
+
+#target .logo {
+    //float: right;
+}
+
+.prevision {
+    text-align: center;
+    margin: 5%;
+}

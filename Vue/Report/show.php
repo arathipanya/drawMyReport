@@ -9,14 +9,12 @@ google.load('visualization', '1', {packages: ['corechart', 'line', 'table']});
     <div class="jumbotron">
 
    <?php foreach ($report as $r) : ?>
+   <img class="logo" src="./modules/drawMyReport/Contenu/images/dmr-logo.png" height="100px">
         <h2><?php echo $r["title"] ?></h2>
         <h3><small><?php echo $r["subtitle"] ?></small></h3>
-   <h4>From: <input id="dp-start" class="date-picker" name="start" placeholder="mm/dd/yyyy"> - To: <input id="dp-end" class="date-picker" name="end" placeholder="mm/dd/yyyy"><button class="date-picker-btn untarget">Confirm</button></h4>
+   <h5>From: <input id="dp-start" class="date-picker" name="start" placeholder="mm/dd/yyyy"> - To: <input id="dp-end" class="date-picker" name="end" placeholder="mm/dd/yyyy"><button class="date-picker-btn untarget">Confirm</button></h5>
 <?php endforeach; ?>
     </div>
-
-
-  <!--img class="graph" data-path="<?php echo $path; ?>include/php/generate_graph.php?service_id=<?php echo $graphs_array[$i]->data ?>&tp=<?php echo $tp ?>&session_id=<?php echo session_id();?>&time=<?php echo time();?>&width=600"/-->
 
 <div class="row">
 <div class="col-md-1"></div>
@@ -29,14 +27,17 @@ google.load('visualization', '1', {packages: ['corechart', 'line', 'table']});
   </div>
 
   <div class="row">
-      <div class="untarget-after col-md-6 <?php echo $graph['type']; ?>" style="width: 400px; height: 300px;" data-index="<?php echo $graph['data']; ?>" data-sid="<?php echo session_id(); ?>"></div>
-      <canvas class="canvases col-md-6" hidden width="400px" height="300px"></canvas>
-      <div class="col-md-6">
+      <div class="chart untarget-after col-md-12 <?php echo $graph['type']; ?>" style="width: 100%; height: 300px;" data-index="<?php echo $graph['data']; ?>" data-sid="<?php echo session_id(); ?>"></div>
+      <canvas class="canvases col-md-12" hidden width="100%" height="300px"></canvas>
+      <div class="prevision col-md-12">
           <div class="row">
-  <div class="col-md-12"><strong>Last 7 days :</strong> gained 2% per day. Limit reached in 135 days</div>
+            <div class="col-md-12"><strong>Since beginning:</strong> Limit reached on <span class="beginning">No data available</span></div>
           </div>
           <div class="row">
-  <div class="col-md-12"><strong>Last month :</strong> gained 4% per day. Limit reached in 68 days</div>
+            <div class="col-md-12"><strong>Last month:</strong> Limit reached on <span class="month">No data available</span></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12"><strong>Last 7 days:</strong> Limit reached on <span class="seven">No data available</span></div>
           </div>
       </div>
   </div>

@@ -24,13 +24,13 @@
             <div class="select-parent">
                 <select type="text" class="form-control" name="type" placeholder="Select a type">
                     <option value="line-chart">Line chart</option>
-                    <option value="pie-chart">Pie chart</option>
+                    <option value="area-chart">Area chart</option>
                 </select>
             </div>
         </div>
     </div>
 
-    <div class="input-group" id="">
+    <div class="input-group" id="" style="display: none;">
         <span class="input-group-addon">Period</span>
         <div class="form-control" id="">   
             <div class="select-parent">
