@@ -1,0 +1,128 @@
+a {
+  color: #86a02d;
+}
+a:hover {
+  color: #54680f;
+}
+
+.btn-default {
+  background-color: #86a02d;
+  color: #fff;
+}
+.btn-default:hover {
+  color: #fff;
+  background-color: #54680f;
+}
+
+.btn-primary {
+  background-color: #fff;
+  color: #363636;
+  border-color: #86a02d;
+}
+.btn-primary:hover {
+  background-color: #abc163;
+  color: #363636;
+  border-color: #86a02d;
+}
+.btn-primary:focus {
+  background-color: #abc163;
+  color: #363636;
+  border-color: #86a02d;
+}
+.btn-primary.active {
+  background-color: #abc163;
+  color: #363636;
+  border-color: #86a02d;
+}
+
+.form {
+  background-color: #eee;
+  margin: 5px;
+  width: 98%;
+/*
+display: inline-block;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+cursor: pointer;
+*/
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: normal;
+line-height: 1.428571429;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+
+.input-group {
+  width: 100%;
+}
+.input-group-addon {
+  background-color: #eee;
+  color: #363636;
+  border-color: #cdcdcd;
+  width: 25%;
+  border-top: none;
+  border-rigth: none;
+  border-bottom: none;
+  text-align: center;
+}
+.input-group select.form-control {
+  display:block;
+  backgound-color:red;
+}
+.input-group .label-report-graph-edit {
+  width:10%;
+}
+
+#index-data-select {
+  text-align: left;
+}
+
+.input-group-radio {
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-color: #cdcdcd;
+}
+
+.input-group-addon-radio {
+  display: table-cell;
+}
+
+.input-group .form-control {
+  color: #9b9b9b;
+  border-color: #cdcdcd;
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+
+}
+
+footer {
+    margin-top: 100px;
+}
+
+#target {
+  background-color: #fff;
+}
+
+#target .jumbotron {
+  text-align: center;
+  background-color: #fff;
+}
+
+#target .logo {
+    //float: right;
+}
+
+.prevision {
+    text-align: center;
+    margin: 5%;
+}

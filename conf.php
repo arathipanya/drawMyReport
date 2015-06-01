@@ -25,7 +25,7 @@ $module_conf['drawMyReport']["is_removeable"] = "1";
 $module_conf['drawMyReport']["author"] = "drawMyReport Team";
 $module_conf['drawMyReport']["lang_files"] = "1";
 $module_conf['drawMyReport']["sql_files"] = "1";
-$module_conf['drawMyReport']["php_files"] = "1";
-$module_conf['drawMyReport']["svc_tools"] = "1";  
-$module_conf['drawMyReport']["host_tools"] = "1";
+$module_conf['drawMyReport']["php_files"] = "0";
+$module_conf['drawMyReport']["svc_tools"] = "0";  
+$module_conf['drawMyReport']["host_tools"] = "0";
 ?>
